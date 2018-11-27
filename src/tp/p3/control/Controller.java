@@ -12,10 +12,14 @@ public class Controller {
 	private String prompt = "Command > ";
 	private boolean noPrint;
 	
-	public GamePrinter printer;
+	private GamePrinter printer;
 	
 	public Controller(Game game, GamePrinter printer) {
 		this.game = game;
+		this.printer = printer;
+	}
+	
+	public void setPrinter(GamePrinter printer) {
 		this.printer = printer;
 	}
 	

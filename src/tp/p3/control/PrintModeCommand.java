@@ -21,7 +21,7 @@ public class PrintModeCommand extends Command{
 	}
 	
 	public Command parse(String[] commandWords, Controller controller) {
-		if((commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) && ((commandWords.length == 2))) {
+		if((commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) && ((commandWords.length == 2) && (commandWords[1].equals("debug") || commandWords[1].equals("release")) )) {
 			return new PrintModeCommand(commandWords[1]);
 		}
 		else {
@@ -32,10 +32,10 @@ public class PrintModeCommand extends Command{
 	public void execute(Game game, Controller controller) {
 		switch(mode) {
 			case "release":
-				controller.printer = new ReleasePrinter(game, game.getRows(), game.getCols());
+				controller.setPrinter(new ReleasePrinter(game));
 				break;
 			case "debug":
-				controller.printer = new DebugPrinter(game);
+				controller.setPrinter(new DebugPrinter(game));
 				break;
 		}
 	}

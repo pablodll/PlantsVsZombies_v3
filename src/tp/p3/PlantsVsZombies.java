@@ -26,7 +26,7 @@ public class PlantsVsZombies {
 				if(args.length == 2) seed = Integer.parseInt(args[1]);
 				
 				Game game = new Game(level, seed);
-				GamePrinter printer = new ReleasePrinter(game, game.getRows(), game.getCols()); //By default we print Release version
+				GamePrinter printer = new ReleasePrinter(game); //By default we print Release version
 				Controller controller = new Controller(game, printer);
 				
 				System.out.println("Random seed used: " + seed);
