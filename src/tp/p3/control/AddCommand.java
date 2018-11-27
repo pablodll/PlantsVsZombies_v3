@@ -36,7 +36,7 @@ public class AddCommand extends Command {
 
 	public void execute(Game game, Controller controller) {
 		if ((x >= 0 && x < game.getRows()) && (y >= 0 && y < game.getCols() - 1) && game.isEmpty(x, y)) {
-			GameObject plant = PlantFactory.getPlant(plantName, x, y, game);
+			Plant plant = (Plant)PlantFactory.getPlant(plantName, x, y, game);
 
 			if (plant != null) {
 				if (!game.addPlantToGame(plant)) {

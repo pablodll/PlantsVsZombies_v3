@@ -51,7 +51,7 @@ public class Game {
 	public void computerAction() {
 		if(zombieManager.isZombieAdded()) {
 			
-			Zombie zombie = ZombieFactory.getZombie((cycleCounter % (board.getRows() - 1)), (board.getCols()-1), this);
+			Zombie zombie = (Zombie)ZombieFactory.getZombie((cycleCounter % (board.getRows() - 1)), (board.getCols()-1), this);
 			board.addZombie(zombie);
 		}
 		cycleCounter++;

@@ -5,7 +5,7 @@ import tp.p3.logic.entities.GameObject;
 
 public abstract class Plant extends GameObject{
 	
-	protected int cost;
+	protected static int cost;
 	
 	protected Plant() {
 		
