@@ -6,15 +6,16 @@ import tp.p3.logic.entities.GameObject;
 public class CherryBomb extends Plant {
 	
 	public CherryBomb() {
-		initialise();
+		super();
+		initialize();
 	}
 	
 	public CherryBomb(int coor_x, int coor_y, Game currentGame) {
 		super(coor_x, coor_y, currentGame);
-		initialise();
+		initialize();
 	}
 	
-	private void initialise() {
+	private void initialize() {
 		cost = 50;
 		maxHealth = 2;
 		health = maxHealth;
@@ -26,18 +27,18 @@ public class CherryBomb extends Plant {
 		infoName = "[C]herrybomb";
 	}
 	
-	public GameObject getThisObject(int x, int y, Game game) {
-		return new CherryBomb(x, y, game);
+	public GameObject getThisObject() {
+		return new CherryBomb();
 	}
 	
-	private void selfdestroy() {
+	private void selfDestroy() {
 		health = 0;
 	}
 	
 	public void update() {
 		if(cycle == 2) {
 			game.explode(x, y, damage);
-			selfdestroy();
+			selfDestroy();
 		}
 		this.cycle++;
 	}	

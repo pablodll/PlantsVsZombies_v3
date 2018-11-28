@@ -6,7 +6,7 @@ import tp.p3.logic.entities.GameObject;
 public abstract class Zombie extends GameObject {
 		
 	protected Zombie() {
-			
+		super();
 	}
 	
 	protected Zombie(int coor_x, int coor_y, Game currentGame) {

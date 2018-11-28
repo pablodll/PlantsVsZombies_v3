@@ -8,15 +8,16 @@ public class Sunflower extends Plant {
 	private static int coins = 10;
 	
 	public Sunflower() {
-		initialise();
+		super();
+		initialize();
 	}
 	
 	public Sunflower(int coor_x, int coor_y, Game currentGame) {
 		super(coor_x, coor_y, currentGame);
-		initialise();
+		initialize();
 	}
 	
-	private void initialise() {
+	private void initialize() {
 		cost = 20;
 		maxHealth = 2;
 		health = maxHealth;
@@ -28,8 +29,8 @@ public class Sunflower extends Plant {
 		infoName = "[S]unflower";
 	}
 	
-	public GameObject getThisObject(int x, int y, Game game) {
-		return new Sunflower(x, y, game);
+	public GameObject getThisObject() {
+		return new Sunflower();
 	}
 	
 	public void update() {

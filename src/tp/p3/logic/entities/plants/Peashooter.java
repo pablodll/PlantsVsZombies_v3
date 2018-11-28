@@ -6,15 +6,16 @@ import tp.p3.logic.entities.GameObject;
 public class Peashooter extends Plant {
 	
 	public Peashooter() {
-		initialise();
+		super();
+		initialize();
 	}
 	
 	public Peashooter(int coor_x, int coor_y, Game currentGame) {
 		super(coor_x, coor_y, currentGame);
-		initialise();
+		initialize();
 	}
 	
-	private void initialise() {
+	private void initialize() {
 		cost = 50;
 		maxHealth = 5;
 		health = maxHealth;
@@ -26,8 +27,8 @@ public class Peashooter extends Plant {
 		infoName = "[P]eashooter";
 	}
 	
-	public GameObject getThisObject(int x, int y, Game game) {
-		return new Peashooter(x, y, game);
+	public GameObject getThisObject() {
+		return new Peashooter();
 	}
 	
 	public void update() {

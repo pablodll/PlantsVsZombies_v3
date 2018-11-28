@@ -6,15 +6,16 @@ import tp.p3.logic.entities.GameObject;
 public class Wallnut extends Plant {
 	
 	public Wallnut() {
-		initialise();
+		super();
+		initialize();
 	}
 	
 	public Wallnut(int coor_x, int coor_y, Game currentGame) {
 		super(coor_x, coor_y, currentGame);
-		initialise();
+		initialize();
 	}
 	
-	private void initialise() {
+	private void initialize() {
 		cost = 50;
 		maxHealth = 10;
 		health = maxHealth;
@@ -26,8 +27,8 @@ public class Wallnut extends Plant {
 		infoName = "Wall[N]ut";
 	}
 	
-	public GameObject getThisObject(int x, int y, Game game) {
-		return new Wallnut(x, y, game);
+	public GameObject getThisObject() {
+		return new Wallnut();
 	}
 	
 	public void update() {

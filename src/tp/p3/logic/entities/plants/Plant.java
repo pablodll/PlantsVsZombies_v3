@@ -8,7 +8,7 @@ public abstract class Plant extends GameObject{
 	protected static int cost;
 	
 	protected Plant() {
-		
+		super();
 	}
 	
 	protected Plant(int coor_x, int coor_y, Game currentGame) {

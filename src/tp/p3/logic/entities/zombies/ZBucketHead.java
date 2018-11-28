@@ -6,15 +6,15 @@ import tp.p3.logic.entities.GameObject;
 public class ZBucketHead extends Zombie{
 	
 	public ZBucketHead() {
-		initialise();
+		initialize();
 	}
 	
 	public ZBucketHead(int coor_x, int coor_y, Game currentGame) {
 		super(coor_x, coor_y, currentGame);
-		initialise();
+		initialize();
 	}
 	
-	private void initialise() {
+	private void initialize() {
 		maxHealth = 8;
 		health = maxHealth;
 		cycle = 0;
@@ -25,8 +25,8 @@ public class ZBucketHead extends Zombie{
 		infoName = "Zombie buckethead[W]";
 	}
 	
-	public GameObject getThisObject(int x, int y, Game game) {
-		return new ZBucketHead(x, y, game);
+	public GameObject getThisObject() {
+		return new ZBucketHead();
 	}
 	
 }

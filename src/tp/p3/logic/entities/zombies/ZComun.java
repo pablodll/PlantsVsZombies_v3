@@ -6,15 +6,15 @@ import tp.p3.logic.entities.GameObject;
 public class ZComun extends Zombie{
 	
 	public ZComun() {
-		initialise();
+		initialize();
 	}
 	
 	public ZComun(int coor_x, int coor_y, Game currentGame) {
 		super(coor_x, coor_y, currentGame);
-		initialise();
+		initialize();
 	}
 	
-	private void initialise() {
+	private void initialize() {
 		maxHealth = 5;
 		health = maxHealth;
 		cycle = 0;
@@ -25,8 +25,8 @@ public class ZComun extends Zombie{
 		infoName = "[Z]ombie comun";
 	}
 	
-	public GameObject getThisObject(int x, int y, Game game) {
-		return new ZComun(x, y, game);
+	public GameObject getThisObject() {
+		return new ZComun();
 	}
 	
 }

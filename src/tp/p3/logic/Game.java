@@ -35,10 +35,14 @@ public class Game {
 		board.update();
 	}
 	
-	public boolean addPlantToGame(Plant plant) {
+	public boolean addPlantToGame(Plant plant, int x, int y) {
 		if(suncoinManager.getCoins() >= plant.getCost()) {
+			plant.setCoords(x, y);
+			plant.setGame(this);
+			
 			board.addPlant(plant);
 			suncoinManager.useCoins(plant.getCost());
+			
 			return true;
 		}
 		return false;
@@ -51,7 +55,9 @@ public class Game {
 	public void computerAction() {
 		if(zombieManager.isZombieAdded()) {
 			
-			Zombie zombie = (Zombie)ZombieFactory.getZombie((cycleCounter % (board.getRows() - 1)), (board.getCols()-1), this);
+			Zombie zombie = ZombieFactory.getZombie();
+			zombie.setCoords((cycleCounter % (board.getRows() - 1)), (board.getCols()-1));
+			zombie.setGame(this);
 			board.addZombie(zombie);
 		}
 		cycleCounter++;

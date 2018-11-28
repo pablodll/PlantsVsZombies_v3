@@ -13,12 +13,13 @@ public class ZombieFactory {
 		new ZAthlete(),
 	};
 		
-	public static GameObject getZombie(int x, int y, Game game) {
-		GameObject zombie = null;
+	public static Zombie getZombie() {
+		Zombie zombie = null;
 		int i = 0;
 		String zombieType = randZombie();
+		
 		while(zombie == null && i < availableZombies.length) {
-			zombie = availableZombies[i].parse(zombieType, x, y, game);
+			zombie = (Zombie)availableZombies[i].parse(zombieType);
 			i++;
 		}
 			

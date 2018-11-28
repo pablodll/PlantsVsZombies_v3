@@ -1,8 +1,6 @@
 package tp.p3.logic.entities;
 
 import tp.p3.logic.Game;
-import tp.p3.logic.entities.plants.Peashooter;
-import tp.p3.logic.entities.plants.Plant;
 
 public abstract class GameObject {
 	
@@ -26,15 +24,23 @@ public abstract class GameObject {
 		this.x = coor_x;
 		this.y = coor_y;
 		this.game = currentGame;
-		cycle = 0;
 	}
 	
 	public abstract void update();
-	public abstract GameObject getThisObject(int x, int y, Game game);
+	public abstract GameObject getThisObject();
 	
-	public GameObject parse(String name, int x, int y, Game game) {
+	public void setCoords(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	public void setGame(Game game) {
+		this.game = game;
+	}
+	
+	public GameObject parse(String name) {
 		if(name.equals(this.name) || (name.equals(this.symbol.toLowerCase()))) {
-			return getThisObject(x, y, game);
+			return getThisObject();
 		}
 		else {
 			return null;

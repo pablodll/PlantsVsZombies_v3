@@ -6,15 +6,15 @@ import tp.p3.logic.entities.GameObject;
 public class ZAthlete extends Zombie{
 	
 	public ZAthlete() {
-		initialise();
+		initialize();
 	}
 	
 	public ZAthlete(int coor_x, int coor_y, Game currentGame) {
 		super(coor_x, coor_y, currentGame);
-		initialise();
+		initialize();
 	}
 	
-	private void initialise() {
+	private void initialize() {
 		maxHealth = 2;
 		health = maxHealth;
 		cycle = 0;
@@ -26,8 +26,8 @@ public class ZAthlete extends Zombie{
 	}
 	
 
-	public GameObject getThisObject(int x, int y, Game game) {
-		return new ZAthlete(x, y, game);
+	public GameObject getThisObject() {
+		return new ZAthlete();
 	}
 	
 	@Override
