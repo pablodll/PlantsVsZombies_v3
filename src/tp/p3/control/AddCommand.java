@@ -34,22 +34,27 @@ public class AddCommand extends Command {
 		}
 	}
 
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game, Controller controller) {
+		boolean ret = true;
 		if ((x >= 0 && x < game.getRows()) && (y >= 0 && y < game.getCols() - 1) && game.isEmpty(x, y)) {
 			Plant plant = PlantFactory.getPlant(plantName);
 			
 			if (plant != null) {
 				if (!game.addPlantToGame(plant, x, y)) {
+					ret = false;
 					System.err.println("The plant could not be added");
 					controller.setNoPrintGameState();
 				}
 			} else {
+				ret = false;
 				System.err.println("Invalid plant");
 				controller.setNoPrintGameState();
 			}
 		} else {
+			ret = false;
 			System.err.println("Invalid position");
 			controller.setNoPrintGameState();
 		}
+		return ret;
 	}
 }
