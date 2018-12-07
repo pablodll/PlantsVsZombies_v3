@@ -1,6 +1,7 @@
 package tp.p3.logic;
 
 import tp.p3.logic.lists.Board;
+import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.logic.Level;
 import tp.p3.logic.SuncoinManager;
 import tp.p3.logic.ZombieManager;
@@ -35,17 +36,24 @@ public class Game {
 		board.update();
 	}
 	
-	public boolean addPlantToGame(Plant plant, int x, int y) {
-		if(suncoinManager.getCoins() >= plant.getCost()) {
-			plant.setCoords(x, y);
-			plant.setGame(this);
-			
-			board.addPlant(plant);
-			suncoinManager.useCoins(plant.getCost());
-			
-			return true;
+	public boolean addPlantToGame(Plant plant, int x, int y) throws CommandExecuteException{
+		if(x >= 0 && x < getRows() && y >= 0 && y < getCols() && isEmpty(x,y)) {
+			if(suncoinManager.getCoins() >= plant.getCost()) {
+				plant.setCoords(x, y);
+				plant.setGame(this);
+				
+				board.addPlant(plant);
+				suncoinManager.useCoins(plant.getCost());
+				
+				return true;
+			}
+			else {
+				throw new CommandExecuteException("Failed to add " + plant.getName() + ": not enough suncoins available");
+			}
 		}
-		return false;
+		else {
+			throw new CommandExecuteException("Failed to add " + plant.getName() + ": " + "(" + x + ", " + y + ") is an invalid position");
+		}
 	}
 	
 	public void endGame() {

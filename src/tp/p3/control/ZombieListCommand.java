@@ -22,9 +22,10 @@ public class ZombieListCommand extends NoParamsCommand{
 		}
 	}
 	
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game, Controller controller) {
 		controller.setNoPrintGameState();
 		System.out.println(ZombieFactory.listOfAvailableZombies());
+		return true; // NO
 	}
 	
 }

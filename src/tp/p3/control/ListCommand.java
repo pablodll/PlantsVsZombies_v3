@@ -22,8 +22,9 @@ public class ListCommand extends NoParamsCommand{
 		}
 	}
 	
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game, Controller controller) {
 		controller.setNoPrintGameState();
 		System.out.println(PlantFactory.listOfAvailablePlants());
+		return true; // NO
 	}
 }

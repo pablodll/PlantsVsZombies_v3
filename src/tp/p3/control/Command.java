@@ -1,5 +1,6 @@
 package tp.p3.control;
 
+import tp.p3.exceptions.*;
 import tp.p3.logic.Game;
 
 public abstract class Command {
@@ -15,10 +16,11 @@ public abstract class Command {
 		helpText = commandTextMsg;
 		helpInfo = helpTextMsg;
 	}
-	// Some commands may generate an error in the execute or parse methods.
-	// In the absence of exceptions , they must the tell the controller not to print the board
-	public abstract boolean execute(Game game, Controller controller);
-	public abstract Command parse(String[] commandWords, Controller controller);
+	
+	public abstract boolean execute(Game game, Controller controller) throws CommandExecuteException;
+	
+	public abstract Command parse(String[] commandWords, Controller controller) throws CommandParseException;
+	
 	public String helpText(){return " " + helpText + ": " + helpInfo;}
 
 }

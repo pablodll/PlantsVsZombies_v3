@@ -1,5 +1,6 @@
 package tp.p3.control;
 
+import tp.p3.exceptions.*;
 import tp.p3.logic.Game;
 import tp.p3.logic.entities.plants.*;
 import tp.p3.logic.factories.PlantFactory;
@@ -24,37 +25,38 @@ public class AddCommand extends Command {
 		this.plantName = plantName;
 	}
 
-	public Command parse(String[] commandWords, Controller controller) {
-		if ((commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter))
-				&& ((commandWords.length == 4))) {
-			return new AddCommand(commandWords[1], Integer.parseInt(commandWords[2]),
-					Integer.parseInt(commandWords[3]));
-		} else {
+	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
+		
+		if (commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
+			
+				if (commandWords.length == 4) {
+					// NumberFormatException
+					return new AddCommand(commandWords[1], Integer.parseInt(commandWords[2]), Integer.parseInt(commandWords[3]));
+				}
+				else
+					throw new CommandParseException("Incorrect number of arguments for add command: [A]dd <plant> <x> <y>");
+		} 
+		else
 			return null;
-		}
 	}
 
-	public boolean execute(Game game, Controller controller) {
-		boolean ret = true;
-		if ((x >= 0 && x < game.getRows()) && (y >= 0 && y < game.getCols() - 1) && game.isEmpty(x, y)) {
-			Plant plant = PlantFactory.getPlant(plantName);
+	public boolean execute(Game game, Controller controller) throws CommandExecuteException{
+		
+		Plant plant = PlantFactory.getPlant(plantName);
 			
-			if (plant != null) {
-				if (!game.addPlantToGame(plant, x, y)) {
-					ret = false;
-					System.err.println("The plant could not be added");
-					controller.setNoPrintGameState();
-				}
-			} else {
-				ret = false;
-				System.err.println("Invalid plant");
-				controller.setNoPrintGameState();
+		if (plant != null) {
+			if (!game.addPlantToGame(plant, x, y)) {
+				return false;
+//				System.err.println("The plant could not be added");
+//				controller.setNoPrintGameState();
 			}
-		} else {
-			ret = false;
-			System.err.println("Invalid position");
-			controller.setNoPrintGameState();
+		} 
+		else {
+			throw new CommandExecuteException("Unknown plant name: " + plantName);
+			// return false;
+//			System.err.println("Invalid plant");
+//			controller.setNoPrintGameState();
 		}
-		return ret;
+		return true;
 	}
 }

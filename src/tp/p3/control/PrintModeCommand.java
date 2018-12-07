@@ -29,7 +29,7 @@ public class PrintModeCommand extends Command{
 		}
 	}
 	
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game, Controller controller) {
 		switch(mode) {
 			case "release":
 				controller.setPrinter(new ReleasePrinter(game));
@@ -38,6 +38,7 @@ public class PrintModeCommand extends Command{
 				controller.setPrinter(new DebugPrinter(game));
 				break;
 		}
+		return true; // NO
 	}
 	
 }

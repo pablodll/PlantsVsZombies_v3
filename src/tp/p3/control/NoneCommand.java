@@ -21,7 +21,7 @@ public class NoneCommand extends NoParamsCommand {
 		}
 	}
 	
-	public void execute(Game game, Controller controller) {
-		
+	public boolean execute(Game game, Controller controller) {
+		return true; // NO
 	}
 }
