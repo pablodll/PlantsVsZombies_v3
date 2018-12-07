@@ -27,8 +27,8 @@ public class HelpCommand extends NoParamsCommand{
 	}
 	
 	public boolean execute(Game game, Controller controller) {
-		controller.setNoPrintGameState();
+		//controller.setNoPrintGameState();
 		System.out.println(CommandParser.commandHelp());
-		return true; //NO
+		return true;
 	}
 }

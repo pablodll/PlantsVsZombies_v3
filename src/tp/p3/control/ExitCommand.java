@@ -27,8 +27,8 @@ public class ExitCommand extends NoParamsCommand{
 	
 	public boolean execute(Game game, Controller controller) {
 		game.endGame();
-		System.out.println(game.zombiesWin());
-	return true;
+		System.out.println(game.gameOver());
+		return game.getStatus();
 	}
 	
 }

@@ -6,7 +6,7 @@ import tp.p3.logic.Game;
 public class NoneCommand extends NoParamsCommand {
 	
 	private static String commandText = "none";
-	private static String commandTextMsg = "none";
+	private static String commandTextMsg = "[N]one";
 	private static String helpTextMsg = "skips cycle.";
 	
 	public NoneCommand() {
@@ -26,6 +26,6 @@ public class NoneCommand extends NoParamsCommand {
 	}
 	
 	public boolean execute(Game game, Controller controller) {
-		return true; // NO
+		return true;
 	}
 }

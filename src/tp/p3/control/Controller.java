@@ -10,7 +10,7 @@ public class Controller {
 	
 	private Game game;
 	private Scanner in = new Scanner(System.in);
-	private String unknownCommandMsg = "Comando no reconocido";
+	private String unknownCommandMsg = "Unknown command. Use 'help' to see available commands";
 	private String prompt = "Command > ";
 	private boolean noPrint;
 	

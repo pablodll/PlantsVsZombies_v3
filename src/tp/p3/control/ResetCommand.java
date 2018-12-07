@@ -27,6 +27,6 @@ public class ResetCommand extends NoParamsCommand{
 	
 	public boolean execute(Game game, Controller controller) {
 		game.resetGame();
-		return true; // NO
+		return true;
 	}
 }

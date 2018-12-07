@@ -87,6 +87,10 @@ public class Game {
 		return suncoinManager.getCoins();
 	}
 	
+	public boolean getStatus() {
+		return gameFinished;
+	}
+	
 	public boolean isFinished() {
 		if(board.areZombiesTerminated() && zombieManager.getNumZom() == 0) { // User Wins
 			gameFinished = true;
@@ -107,7 +111,7 @@ public class Game {
 		zombieManager = new ZombieManager(level, seed);
 	}
 	
-	public String zombiesWin() {
+	public String gameOver() {
 		return  "ZZ'\"\"\"\"\"`ZZ ZZP\"\"\"\"\"\"\"ZZ Z\"\"\"\"\"`'\"\"\"`YZ ZZ\"\"\"\"\"\"\"\"`Z    ZZP\"\"\"\"\"YZZ Z\"\"ZZZZZ\"\"Z ZZ\"\"\"\"\"\"\"\"`Z ZZ\"\"\"\"\"\"\"`ZZ \r\n" + 
 				"Z' .zzz. `Z Z' .zzzz  ZZ Z  zz.  zz.  Z ZZ  zzzzzzzZ    Z' .zzz. `Z Z  ZZZZZ  Z ZZ  zzzzzzzZ ZZ  zzzz,  Z \r\n" + 
 				"Z  ZZZZZZZZ Z         `Z Z  ZZZ  ZZZ  Z Z`      ZZZZ    Z  ZZZZZ  Z Z  ZZZZP  Z Z`      ZZZZ Z'        .Z \r\n" + 
@@ -133,7 +137,7 @@ public class Game {
 			System.out.println(userWins());
 		
 		else if(!board.emptyCol(0)) 
-			System.out.println(zombiesWin());
+			System.out.println(gameOver());
 	}
 	
 	public String getString(int coor_x, int coor_y) {
