@@ -25,14 +25,8 @@ public class PrintModeCommand extends Command{
 		
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			
-				if(commandWords.length == 2) { 
-					
-						if(commandWords[1].equals("debug") || commandWords[1].equals("release")) {
-							return new PrintModeCommand(commandWords[1]);
-						}
-						else {
-							throw new CommandParseException("Unknown print mode: " + commandWords[1]);
-						}
+				if(commandWords.length == 2) { 						
+					return new PrintModeCommand(commandWords[1]);
 				}
 				else {
 					throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + this.helpText());
@@ -43,16 +37,24 @@ public class PrintModeCommand extends Command{
 		}
 	}
 	
-	public boolean execute(Game game, Controller controller) {
+	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
+		
+		boolean ret = false;
+		
 		switch(mode) {
 			case "release":
 				controller.setPrinter(new ReleasePrinter(game));
+				ret = true;
 				break;
 			case "debug":
 				controller.setPrinter(new DebugPrinter(game));
+				ret = true;
 				break;
+			default:
+				throw new CommandExecuteException("Unknown print mode: " + mode);
 		}
-		return true; // NO
+		
+		return ret;
 	}
 	
 }
