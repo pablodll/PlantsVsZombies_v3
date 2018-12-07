@@ -30,11 +30,14 @@ public class AddCommand extends Command {
 		if (commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			
 				if (commandWords.length == 4) {
-					// NumberFormatException
-					return new AddCommand(commandWords[1], Integer.parseInt(commandWords[2]), Integer.parseInt(commandWords[3]));
+					try {
+						return new AddCommand(commandWords[1], Integer.parseInt(commandWords[2]), Integer.parseInt(commandWords[3]));
+					} catch (NumberFormatException ex) {
+						throw new CommandParseException("Invalid argument for " + this.commandName + " command, number expected: " + commandTextMsg);
+					}
 				}
 				else
-					throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + this.helpText());
+					throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + commandTextMsg);
 		} 
 		else
 			return null;

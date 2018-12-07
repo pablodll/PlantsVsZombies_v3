@@ -29,7 +29,7 @@ public class PrintModeCommand extends Command{
 					return new PrintModeCommand(commandWords[1]);
 				}
 				else {
-					throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + this.helpText());
+					throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + commandTextMsg);
 				}
 		}
 		else {
