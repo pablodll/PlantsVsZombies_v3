@@ -1,5 +1,6 @@
 package tp.p3.control;
 
+import tp.p3.exceptions.*;
 import tp.p3.logic.Game;
 
 public class NoneCommand extends NoParamsCommand {
@@ -12,9 +13,12 @@ public class NoneCommand extends NoParamsCommand {
 		super(commandText, commandTextMsg, helpTextMsg);
 	}
 	
-	public NoParamsCommand parse(String[] commandWords, Controller controller) {
+	public NoParamsCommand parse(String[] commandWords, Controller controller) throws CommandParseException{
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter) || commandWords[0].equals("")) {
-			return new NoneCommand();
+			if(commandWords.length > 1)
+				throw new CommandParseException(this.commandName + " command has no arguments");
+			else
+				return new NoneCommand();
 		}
 		else {
 			return null;
