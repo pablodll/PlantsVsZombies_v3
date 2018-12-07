@@ -2,6 +2,7 @@ package tp.p3.control;
 
 import tp.p3.logic.Game;
 import tp.p3.logic.print.*;
+import tp.p3.exceptions.*;
 
 public class PrintModeCommand extends Command{
 
@@ -20,9 +21,22 @@ public class PrintModeCommand extends Command{
 		this.mode = mode;
 	}
 	
-	public Command parse(String[] commandWords, Controller controller) {
-		if((commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) && ((commandWords.length == 2) && (commandWords[1].equals("debug") || commandWords[1].equals("release")) )) {
-			return new PrintModeCommand(commandWords[1]);
+	public Command parse(String[] commandWords, Controller controller) throws CommandParseException{
+		
+		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
+			
+				if(commandWords.length == 2) { 
+					
+						if(commandWords[1].equals("debug") || commandWords[1].equals("release")) {
+							return new PrintModeCommand(commandWords[1]);
+						}
+						else {
+							throw new CommandParseException("Unknown print mode: " + commandWords[1]);
+						}
+				}
+				else {
+					throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + this.helpText());
+				}
 		}
 		else {
 			return null;

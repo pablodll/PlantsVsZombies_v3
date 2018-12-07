@@ -34,7 +34,7 @@ public class AddCommand extends Command {
 					return new AddCommand(commandWords[1], Integer.parseInt(commandWords[2]), Integer.parseInt(commandWords[3]));
 				}
 				else
-					throw new CommandParseException("Incorrect number of arguments for add command: [A]dd <plant> <x> <y>");
+					throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + this.helpText());
 		} 
 		else
 			return null;
