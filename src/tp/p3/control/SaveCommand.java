@@ -2,6 +2,7 @@ package tp.p3.control;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.exceptions.CommandParseException;
@@ -10,8 +11,7 @@ import tp.p3.logic.Game;
 public class SaveCommand extends Command{
 
 	private String filename;
-	private FileInputStream in;
-	private FileOutputStream out;
+
 	private static String commandText = "add";
 	private static String commandTextMsg = "[A]dd <plant> <x> <y>";
 	private static String helpTextMsg = "adds plant in position x, y.";
