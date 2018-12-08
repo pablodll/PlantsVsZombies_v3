@@ -36,7 +36,7 @@ public class LoadCommand extends Command{
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			
 			if(commandWords.length == 2) { 						
-				return new SaveCommand(commandWords[1]);
+				return new LoadCommand(commandWords[1]);
 			}
 			else {
 				throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + commandTextMsg);
