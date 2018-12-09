@@ -33,10 +33,10 @@ public class SaveCommand extends Command{
 	}
 	
 	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
-		// TODO Auto-generated method stub
 		try{
 			buffwriter = new BufferedWriter(new FileWriter(this.filename));
 			buffwriter.write("Plants Vs Zombies 3.0");
+			buffwriter.newLine();
 			buffwriter.newLine();
 			buffwriter.write(game.store());
 			buffwriter.close();
@@ -45,7 +45,7 @@ public class SaveCommand extends Command{
 		catch(IOException ex){
 			System.err.println("IOException");
 		}
-		return false;
+		return true;
 	}
 	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {

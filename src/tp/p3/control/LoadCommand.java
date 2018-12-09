@@ -29,7 +29,8 @@ public class LoadCommand extends Command{
 	}
 	
 	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
-		// TODO Auto-generated method stub
+
+		
 		return false;
 	}
 	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
