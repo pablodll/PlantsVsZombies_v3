@@ -3,6 +3,7 @@ package tp.p3.logic.lists;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.NumberFormat;
 
 import tp.p3.logic.lists.GameObjectList;
 import tp.p3.util.MyStringUtils;
@@ -10,6 +11,8 @@ import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.logic.Level;
 import tp.p3.logic.entities.GameObject;
 import tp.p3.logic.entities.zombies.Zombie;
+import tp.p3.logic.factories.PlantFactory;
+import tp.p3.logic.factories.ZombieFactory;
 
 public class Board {
 
@@ -40,31 +43,66 @@ public class Board {
 		return "plantList: " + plantList.externalise() + "\r\nzombieList: " + zombieList.externalise();
 	}
 	
-	public void load(BufferedReader inReader, Game game) throws IOException, CommandExecuteException{
-		String[] prefijos = { "cycles", "sunCoins", "level", "remZombies", "plantList", "zombieList" };
-		String[] cicloLoad, suncoinLoad, levelLoad,remZomLoad, plantListLoad,zombieListLoad;
-		int ciclo,suncoin,remzoms;
-		Level level;
+	public void load(BufferedReader inReader, int numZombies) throws IOException, CommandExecuteException{
+		String[] prefijos = {"plantList", "zombieList" };
+		String[] plantListLoad,zombieListLoad;
 		try{
-			cicloLoad = MyStringUtils.loadLine(inReader, prefijos[0], false);
-			suncoinLoad = MyStringUtils.loadLine(inReader, prefijos[1], false);
-			levelLoad = MyStringUtils.loadLine(inReader, prefijos[2], false);
-			remZomLoad = MyStringUtils.loadLine(inReader, prefijos[3], false);
-			plantListLoad = MyStringUtils.loadLine(inReader, prefijos[4], true);
-			zombieListLoad = MyStringUtils.loadLine(inReader, prefijos[5],true);
+			plantListLoad = MyStringUtils.loadLine(inReader, prefijos[0], true);
+			zombieListLoad = MyStringUtils.loadLine(inReader, prefijos[1],true);
 			
-			ciclo = Integer.parseInt(cicloLoad[0]);
-			suncoin = Integer.parseInt(suncoinLoad[0]);
-			remzoms = Integer.parseInt(remZomLoad[0]);
-			level = Level.parse(levelLoad[0]);
-
+			this.plantList = new GameObjectList(MAX_PLANTS);
+			this.zombieList = new GameObjectList(numZombies);
 			
-			game.etLevel
-			
+			loadList(plantListLoad, false);
+			loadList(zombieListLoad, true);
+						
 		}
-		catch(IOException ex) {
-			
+		catch(IOException | NumberFormatException ex) {
+			System.err.println(ex.getMessage());
+			throw new FileContentsException("Fichero no valido para la carga.");
 		}
+	}
+	
+	public void loadList(String[] list, boolean isZombie) throws CommandExecuteException, FileContentException{
+	
+		GameObject plant = null;
+		GameObject zombie = null;
+		for(int i = 0; i < list.length; i++) {
+			String[] info = list[i].split(":");
+			if(isZombie) {
+				zombie = ZombieFactory.getZombieInfo(info[0]);
+				if(zombie != null) {
+					try {
+						zombie.setHealth(Integer.parseInt(info[1]));
+						zombie.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
+						zombie.setHealth(Integer.parseInt(info[1]));
+//						zombie.setGame(game);
+					}
+					catch(NullPointerException ex) {
+						System.err.println(ex.getMessage());
+						throw new FileContentException("FIchero no valido");
+					}
+				}
+			zombieList.add(zombie);
+			}
+			else{
+				plant = PlantFactory.getPlant(info[0]);
+				if(plant != null) {
+					try {
+						plant.setHealth(Integer.parseInt(info[1]));
+						plant.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
+						plant.setHealth(Integer.parseInt(info[1]));
+//						plant.setGame(game);
+					}
+					catch(NullPointerException ex) {
+						System.err.println(ex.getMessage());
+						throw new FileContentException("FIchero no valido");
+					}
+				}
+				plantList.add(plant);
+			}
+		}
+		
 	}
 	
 	public String getPlantsString(int pos) {

@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import tp.p3.logic.lists.Board;
 import tp.p3.logic.print.GamePrinter;
+import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.logic.Level;
 import tp.p3.logic.SuncoinManager;
@@ -199,7 +200,33 @@ public class Game {
 	}
 	
 	public void load(BufferedReader inReader) throws CommandExecuteException, IOException{
-		board.load(inReader, this);
+		String[] prefijos = { "cycles", "sunCoins", "level", "remZombies"};
+		String[] cicloLoad, suncoinLoad, levelLoad,remZomLoad, plantListLoad,zombieListLoad;
+		int ciclo,suncoin,remzoms;
+		Level level;
+		try{
+			cicloLoad = MyStringUtils.loadLine(inReader, prefijos[0], false);
+			suncoinLoad = MyStringUtils.loadLine(inReader, prefijos[1], false);
+			levelLoad = MyStringUtils.loadLine(inReader, prefijos[2], false);
+			remZomLoad = MyStringUtils.loadLine(inReader, prefijos[3], false);
+
+			ciclo = Integer.parseInt(cicloLoad[0]);
+			suncoin = Integer.parseInt(suncoinLoad[0]);
+			remzoms = Integer.parseInt(remZomLoad[0]);
+			level = Level.parse(levelLoad[0]);
+			
+			board.load(inReader, level.getNumZombies());
+
+			
+			if(level != null) {
+				this.level = level;
+			}
+						
+		}
+		catch(IOException ex) {
+			
+		}
+		
 	}
 	
 	public String getLevel() {

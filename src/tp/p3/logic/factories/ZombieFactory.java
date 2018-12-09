@@ -26,6 +26,19 @@ public class ZombieFactory {
 		return zombie;
 	}
 	
+	public Zombie getZombieInfo(String symbol) {
+		Zombie zombie = null;
+		int i  =0;
+		while(i < availableZombies.length && zombie == null) {
+				if(availableZombies[i].getSymbol().equals(symbol)){
+					zombie = (Zombie)availableZombies[i];
+				}
+				i++;
+		}
+		
+		return zombie;
+	}
+	
 	public static String listOfAvailableZombies() {
 		String info = "";
 		for(Zombie zombie : availableZombies) {
