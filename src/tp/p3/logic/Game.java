@@ -1,5 +1,9 @@
 package tp.p3.logic;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import tp.p3.logic.lists.Board;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.logic.Level;
@@ -202,6 +206,10 @@ public class Game {
 
 	public void explode(int x, int y, int damage) {
 		board.explode(x,y,damage);
+	}
+	
+	public void load(BufferedReader inReader) {
+		board.load(inReader);
 	}
 	
 	public String getLevel() {

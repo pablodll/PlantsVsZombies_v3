@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
+import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.exceptions.CommandParseException;
 import tp.p3.logic.Game;
@@ -29,22 +29,33 @@ public class LoadCommand extends Command{
 	}
 	
 	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
-	String he = "";
-		try {
-			inReader = new BufferedReader(new FileReader(filename));
-			while ((he = inReader.readLine()) != null) {
-				System.out.println(he);
+		if(MyStringUtils.isValidFilename(filename) && MyStringUtils.isReadable(filename)) {
+			try {
+				inReader = new BufferedReader(new FileReader(filename));
+				String title = inReader.readLine();
+				if(title.equals("Plants Vs Zombies 3.0")) {
+					inReader.readLine();
+					game.load(inReader);
+					System.out.println("Game successfully loaded from file " + filename);
+					inReader.close();
+				}
+				else {
+					inReader.close();
+					throw new CommandExecuteException("Cabecera " + title +" no valida.");
+				}
 			}
-			inReader.close();
+			catch(IOException ex) {
+				
+			}
 		}
-		catch(IOException ex) {
-			
+		else {
+			throw new CommandExecuteException("El fichero" + filename + "no es valido.");
 		}
 		
-		return false;
+		return true;
 	}
 	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
-		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
+		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(commandName.substring(0, 2))) {
 			
 			if(commandWords.length == 2) { 						
 				return new LoadCommand(commandWords[1]);

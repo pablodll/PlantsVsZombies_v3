@@ -1,5 +1,9 @@
 package tp.p3.logic.lists;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import tp.p3.logic.lists.GameObjectList;
 import tp.p3.logic.entities.GameObject;
 import tp.p3.logic.entities.zombies.Zombie;
@@ -31,6 +35,25 @@ public class Board {
 	
 	public String store() {
 		return "plantList: " + plantList.externalise() + "\r\nzombieList: " + zombieList.externalise();
+	}
+	
+	public void load(BufferedReader inReader) {
+	String levelLoaded ="";
+	int cicloLoaded,suncoinsLoaded,remzomLodaded;
+		try{
+			inReader.read();
+			cicloLoaded = inReader.read();
+			inReader.read();
+			suncoinsLoaded = inReader.read();
+			inReader.read();
+			levelLoaded = inReader.readLine();
+			inReader.read();
+			
+			
+		}
+		catch(IOException ex) {
+			
+		}
 	}
 	
 	public String getPlantsString(int pos) {
