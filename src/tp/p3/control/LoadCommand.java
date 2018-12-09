@@ -1,10 +1,8 @@
 package tp.p3.control;
 
 import java.io.BufferedReader;
-import java.io.PrintWriter;
-//import java.io.FileInputStream;
-//import java.io.FileOutputStream;
-//import java.io.IOException; SE RECOMIENDA LANZAR IOEXCEPTION
+import java.io.FileReader;
+import java.io.IOException;
 
 
 import tp.p3.exceptions.CommandExecuteException;
@@ -14,6 +12,8 @@ import tp.p3.logic.Game;
 public class LoadCommand extends Command{
 
 	private String filename;
+	
+	private BufferedReader inReader = null; 
 	
 	private static String commandText = "load";
 	private static String commandTextMsg = "[Lo]ad <filename>";
@@ -29,7 +29,17 @@ public class LoadCommand extends Command{
 	}
 	
 	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
-
+	String he = "";
+		try {
+			inReader = new BufferedReader(new FileReader(filename));
+			while ((he = inReader.readLine()) != null) {
+				System.out.println(he);
+			}
+			inReader.close();
+		}
+		catch(IOException ex) {
+			
+		}
 		
 		return false;
 	}

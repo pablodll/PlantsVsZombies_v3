@@ -68,7 +68,7 @@ public abstract class GameObject {
 	}
 	
 	public int getCycle() {
-		return (this.freq - (this.cycle/this.freq));
+		return (this.cycle%this.freq);
 	}
 	
 	public boolean positionIs(int coor_x, int coor_y) {
