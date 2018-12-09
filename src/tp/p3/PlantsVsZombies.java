@@ -5,40 +5,52 @@ import tp.p3.logic.Level;
 import tp.p3.logic.print.*;
 
 import tp.p3.control.Controller;
+import tp.p3.exceptions.ProgramArgumentsException;
 
 
 public class PlantsVsZombies {
 
+	private static String usageMsg = "Usage: PlantsVsZombies <EASY|HARD|INSANE> [<seed>]";
+	
 	public static void main(String[] args) {
 
 		System.out.println(titleScreen());
 		
-		if(args.length == 1 ||args.length == 2) {
-			
-			Level level = null;
-			long seed = System.currentTimeMillis();
-			
-			if(args[0].equals("EASY")) level = Level.EASY;
-			else if(args[0].equals("HARD")) level = Level.HARD;
-			else if(args[0].equals("INSANE")) level = Level.INSANE;
-			
-			if(level != null) {
+		try {
+			if(args.length == 1 ||args.length == 2) {
 				
-				if(args.length == 2) seed = Integer.parseInt(args[1]);
+				Level level = null;
+				long seed = System.currentTimeMillis();
 				
-				Game game = new Game(level, seed);
-				GamePrinter printer = new ReleasePrinter(game); //By default we print Release version
-				Controller controller = new Controller(game, printer);
+				if(args[0].equals("EASY")) level = Level.EASY;
+				else if(args[0].equals("HARD")) level = Level.HARD;
+				else if(args[0].equals("INSANE")) level = Level.INSANE;
+				else throw new ProgramArgumentsException(usageMsg + ": level must be one of: EASY, HARD, INSANE");
 				
-				System.out.println("Random seed used: " + seed);
-
-				controller.run();
-			}
-	    }
-	    else {
-	        System.err.println("Usage: PlantsVsZombies <level> [<seed>]"); 
-	        // Mensaje de error estandar (UNIX), <level>: Obligatorio, [<seed>]: Opcional
-	    }
+				if(level != null) {
+					
+					try {
+						if(args.length == 2) seed = Integer.parseInt(args[1]);
+					} catch (NumberFormatException ex) {
+						throw new ProgramArgumentsException(usageMsg + ": the seed must be a number");
+					}
+						
+					Game game = new Game(level, seed);
+					GamePrinter printer = new ReleasePrinter(game); //By default we print Release version
+					Controller controller = new Controller(game, printer);
+					
+					System.out.println("Random seed used: " + seed);
+	
+					controller.run();
+				}
+		    }
+		    else {
+		    	throw new ProgramArgumentsException(usageMsg);
+		        // Mensaje de error estandar (UNIX), <level>: Obligatorio, [<seed>]: Opcional
+		    }
+		} catch (ProgramArgumentsException ex) {
+			System.err.format(ex.getMessage() + "%n%n");
+		}
 
 	}
 	
