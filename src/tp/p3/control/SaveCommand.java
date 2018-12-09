@@ -2,11 +2,9 @@ package tp.p3.control;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-//import java.io.FileInputStream;
-//import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Writer;
 
+import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.exceptions.CommandParseException;
 import tp.p3.logic.Game;
@@ -16,7 +14,6 @@ public class SaveCommand extends Command{
 	private String filename;
 
 	private BufferedWriter buffwriter = null;
-	private Writer  writeOut = null;
 	
 	private static String commandText = "save";
 	private static String commandTextMsg = "[S]ave <filename>";
@@ -33,19 +30,26 @@ public class SaveCommand extends Command{
 	}
 	
 	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
-		try{
-			buffwriter = new BufferedWriter(new FileWriter(this.filename));
-			buffwriter.write("Plants Vs Zombies 3.0");
-			buffwriter.newLine();
-			buffwriter.newLine();
-			buffwriter.write(game.store());
-			buffwriter.close();
-			System.out.println("Game successfully saved in file " + this.filename + " Use the load command to reload it");
+		if(MyStringUtils.isValidFilename(filename)) {
+			try{
+				buffwriter = new BufferedWriter(new FileWriter(this.filename));
+				buffwriter.write("Plants Vs Zombies 3.0");
+				buffwriter.newLine();
+				buffwriter.newLine();
+				buffwriter.write(game.store());
+				buffwriter.close();
+				System.out.println("Game successfully saved in file " + this.filename + " Use the load command to reload it");
+				return true;
+			}
+			catch(IOException ex){
+				System.err.println("IOException");
+				return false;
+			}
 		}
-		catch(IOException ex){
-			System.err.println("IOException");
+		else{
+			System.err.println("Nombre de archivo no valido");
+			return false;
 		}
-		return true;
 	}
 	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
