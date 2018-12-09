@@ -21,7 +21,7 @@ public class PrintModeCommand extends Command{
 		this.mode = mode;
 	}
 	
-	public Command parse(String[] commandWords, Controller controller) throws CommandParseException{
+	public Command parse(String[] commandWords) throws CommandParseException{
 		
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			
@@ -37,17 +37,17 @@ public class PrintModeCommand extends Command{
 		}
 	}
 	
-	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandExecuteException {
 		
 		boolean ret = false;
 		
 		switch(mode) {
 			case "release":
-				controller.setPrinter(new ReleasePrinter(game));
+				game.setPrinter(new ReleasePrinter(game));
 				ret = true;
 				break;
 			case "debug":
-				controller.setPrinter(new DebugPrinter(game));
+				game.setPrinter(new DebugPrinter(game));
 				ret = true;
 				break;
 			default:

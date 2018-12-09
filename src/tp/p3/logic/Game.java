@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import tp.p3.logic.lists.Board;
+import tp.p3.logic.print.GamePrinter;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.logic.Level;
 import tp.p3.logic.SuncoinManager;
@@ -24,6 +25,8 @@ public class Game {
 	private SuncoinManager suncoinManager;
 	private ZombieManager zombieManager;
 	
+	private GamePrinter printer;
+	
 	public Game(Level new_level, long new_seed) {
 //		cycleCounter = 0;
 		gameFinished = false;
@@ -38,6 +41,14 @@ public class Game {
 	
 	public void update(){
 		board.update();
+	}
+	
+	public void print() {
+		printer.printGame(this);
+	}
+	
+	public void setPrinter(GamePrinter printer) {
+		this.printer = printer;
 	}
 	
 	public boolean addPlantToGame(Plant plant, int x, int y) throws CommandExecuteException{
@@ -113,27 +124,6 @@ public class Game {
 		board = new Board(level.getNumZombies());
 		suncoinManager = new SuncoinManager();
 		zombieManager = new ZombieManager(level, seed);
-	}
-	
-	public String gameOver() {
-		return  "ZZ'\"\"\"\"\"`ZZ ZZP\"\"\"\"\"\"\"ZZ Z\"\"\"\"\"`'\"\"\"`YZ ZZ\"\"\"\"\"\"\"\"`Z    ZZP\"\"\"\"\"YZZ Z\"\"ZZZZZ\"\"Z ZZ\"\"\"\"\"\"\"\"`Z ZZ\"\"\"\"\"\"\"`ZZ \r\n" + 
-				"Z' .zzz. `Z Z' .zzzz  ZZ Z  zz.  zz.  Z ZZ  zzzzzzzZ    Z' .zzz. `Z Z  ZZZZZ  Z ZZ  zzzzzzzZ ZZ  zzzz,  Z \r\n" + 
-				"Z  ZZZZZZZZ Z         `Z Z  ZZZ  ZZZ  Z Z`      ZZZZ    Z  ZZZZZ  Z Z  ZZZZP  Z Z`      ZZZZ Z'        .Z \r\n" + 
-				"Z  ZZZ   `Z Z  ZZZZZ  ZZ Z  ZZZ  ZZZ  Z ZZ  ZZZZZZZZ    Z  ZZZZZ  Z Z  ZZZZ' .Z ZZ  ZZZZZZZZ ZZ  ZZZb. \"Z \r\n" + 
-				"Z. `ZZZ' .Z Z  ZZZZZ  ZZ Z  ZZZ  ZZZ  Z ZZ  ZZZZZZZZ    Z. `ZZZ' .Z Z  ZZP' .ZZ ZZ  ZZZZZZZZ ZZ  ZZZZZ  Z \r\n" + 
-				"ZZ.     .ZZ Z  ZZZZZ  ZZ Z  ZZZ  ZZZ  Z ZZ        .Z    ZZb     dZZ Z     .dZZZ ZZ        .Z ZZ  ZZZZZ  Z \r\n" + 
-				"ZZZZZZZZZZZ ZZZZZZZZZZZZ ZZZZZZZZZZZZZZ ZZZZZZZZZZZZ    ZZZZZZZZZZZ ZZZZZZZZZZZ ZZZZZZZZZZZZ ZZZZZZZZZZZZ \r\n" + 
-				"                                                                                                          ";
-	}
-	
-	public String userWins() {
-		return	"oooooo   oooo   .oooooo.   ooooo     ooo    oooooo   oooooo     oooo ooooo ooooo      ooo\r\n" + 
-				" `888.   .8'   d8P'  `Y8b  `888'     `8'     `888.    `888.     .8'  `888' `888b.     `8'\r\n" + 
-				"  `888. .8'   888      888  888       8       `888.   .8888.   .8'    888   8 `88b.    8 \r\n" + 
-				"   `888.8'    888      888  888       8        `888  .8'`888. .8'     888   8   `88b.  8 \r\n" + 
-				"    `888'     888      888  888       8         `888.8'  `888.8'      888   8     `88b.8 \r\n" + 
-				"     888      `88b    d88'  `88.    .8'          `888'    `888'       888   8       `888 \r\n" + 
-				"    o888o      `Y8bood8P'     `YbodP'             `8'      `8'       o888o o8o        `8 ";
 	}
 	
 	public void winner() {
@@ -227,5 +217,26 @@ public class Game {
 	
 	public long getSeed() {
 		return seed;
+	}
+	
+	public String gameOver() {
+		return  "ZZ'\"\"\"\"\"`ZZ ZZP\"\"\"\"\"\"\"ZZ Z\"\"\"\"\"`'\"\"\"`YZ ZZ\"\"\"\"\"\"\"\"`Z    ZZP\"\"\"\"\"YZZ Z\"\"ZZZZZ\"\"Z ZZ\"\"\"\"\"\"\"\"`Z ZZ\"\"\"\"\"\"\"`ZZ \r\n" + 
+				"Z' .zzz. `Z Z' .zzzz  ZZ Z  zz.  zz.  Z ZZ  zzzzzzzZ    Z' .zzz. `Z Z  ZZZZZ  Z ZZ  zzzzzzzZ ZZ  zzzz,  Z \r\n" + 
+				"Z  ZZZZZZZZ Z         `Z Z  ZZZ  ZZZ  Z Z`      ZZZZ    Z  ZZZZZ  Z Z  ZZZZP  Z Z`      ZZZZ Z'        .Z \r\n" + 
+				"Z  ZZZ   `Z Z  ZZZZZ  ZZ Z  ZZZ  ZZZ  Z ZZ  ZZZZZZZZ    Z  ZZZZZ  Z Z  ZZZZ' .Z ZZ  ZZZZZZZZ ZZ  ZZZb. \"Z \r\n" + 
+				"Z. `ZZZ' .Z Z  ZZZZZ  ZZ Z  ZZZ  ZZZ  Z ZZ  ZZZZZZZZ    Z. `ZZZ' .Z Z  ZZP' .ZZ ZZ  ZZZZZZZZ ZZ  ZZZZZ  Z \r\n" + 
+				"ZZ.     .ZZ Z  ZZZZZ  ZZ Z  ZZZ  ZZZ  Z ZZ        .Z    ZZb     dZZ Z     .dZZZ ZZ        .Z ZZ  ZZZZZ  Z \r\n" + 
+				"ZZZZZZZZZZZ ZZZZZZZZZZZZ ZZZZZZZZZZZZZZ ZZZZZZZZZZZZ    ZZZZZZZZZZZ ZZZZZZZZZZZ ZZZZZZZZZZZZ ZZZZZZZZZZZZ \r\n" + 
+				"                                                                                                          ";
+	}
+	
+	public String userWins() {
+		return	"oooooo   oooo   .oooooo.   ooooo     ooo    oooooo   oooooo     oooo ooooo ooooo      ooo\r\n" + 
+				" `888.   .8'   d8P'  `Y8b  `888'     `8'     `888.    `888.     .8'  `888' `888b.     `8'\r\n" + 
+				"  `888. .8'   888      888  888       8       `888.   .8888.   .8'    888   8 `88b.    8 \r\n" + 
+				"   `888.8'    888      888  888       8        `888  .8'`888. .8'     888   8   `88b.  8 \r\n" + 
+				"    `888'     888      888  888       8         `888.8'  `888.8'      888   8     `88b.8 \r\n" + 
+				"     888      `88b    d88'  `88.    .8'          `888'    `888'       888   8       `888 \r\n" + 
+				"    o888o      `Y8bood8P'     `YbodP'             `8'      `8'       o888o o8o        `8 ";
 	}
 }

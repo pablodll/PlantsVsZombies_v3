@@ -17,9 +17,9 @@ public abstract class Command {
 		helpInfo = helpTextMsg;
 	}
 	
-	public abstract boolean execute(Game game, Controller controller) throws CommandExecuteException;
+	public abstract boolean execute(Game game) throws CommandExecuteException;
 	
-	public abstract Command parse(String[] commandWords, Controller controller) throws CommandParseException;
+	public abstract Command parse(String[] commandWords) throws CommandParseException;
 	
 	public String helpText(){return " " + helpText + ": " + helpInfo;}
 

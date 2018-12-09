@@ -9,6 +9,6 @@ public abstract class NoParamsCommand extends Command {
 		super(commandText, commandTextMsg, helpTextMsg);
 	}
 
-	public abstract NoParamsCommand parse(String[] commandWords, Controller controller) throws CommandParseException;
+	public abstract NoParamsCommand parse(String[] commandWords) throws CommandParseException;
 	
 }

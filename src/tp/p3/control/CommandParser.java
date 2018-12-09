@@ -17,11 +17,11 @@ public class CommandParser {
 		new SaveCommand(),
 	};
 	
-	public static Command parseCommand(String[] commandWords, Controller controller) throws CommandParseException {
+	public static Command parseCommand(String[] commandWords) throws CommandParseException {
 		Command command = null;
 		int i = 0;
 		while(command == null && i < availableCommands.length) {
-			command = availableCommands[i].parse(commandWords, controller);
+			command = availableCommands[i].parse(commandWords);
 			i++;
 		}
 		return command;

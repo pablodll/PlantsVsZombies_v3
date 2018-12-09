@@ -14,15 +14,9 @@ public class Controller {
 	private String prompt = "Command > ";
 	private boolean noPrint;
 	
-	private GamePrinter printer;
-	
 	public Controller(Game game, GamePrinter printer) {
 		this.game = game;
-		this.printer = printer;
-	}
-	
-	public void setPrinter(GamePrinter printer) {
-		this.printer = printer;
+		this.game.setPrinter(printer);
 	}
 	
 	public boolean checkPrintState() {
@@ -45,10 +39,10 @@ public class Controller {
 				String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
 				
 				try {				
-					Command command = CommandParser.parseCommand(words, this);
+					Command command = CommandParser.parseCommand(words);
 				
 					if (command != null) {
-						if (!command.execute(game, this)) setNoPrintGameState();
+						if (!command.execute(game)) setNoPrintGameState();
 					}
 					else {
 						throw new CommandParseException(unknownCommandMsg);
@@ -66,7 +60,7 @@ public class Controller {
 	private void printGame(boolean noPrint) {
 		if(!noPrint){
 			game.update();
-			printer.printGame(game);
+			game.print();
 			game.computerAction();
 		}
 	}

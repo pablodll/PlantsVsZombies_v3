@@ -25,7 +25,7 @@ public class AddCommand extends Command {
 		this.plantName = plantName;
 	}
 
-	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		
 		if (commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			
@@ -43,7 +43,7 @@ public class AddCommand extends Command {
 			return null;
 	}
 
-	public boolean execute(Game game, Controller controller) throws CommandExecuteException{
+	public boolean execute(Game game) throws CommandExecuteException{
 		
 		Plant plant = PlantFactory.getPlant(plantName);
 			

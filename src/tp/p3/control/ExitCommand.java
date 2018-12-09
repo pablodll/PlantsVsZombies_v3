@@ -13,7 +13,7 @@ public class ExitCommand extends NoParamsCommand{
 		super(commandText, commandTextMsg, helpTextMsg);
 	}
 	
-	public NoParamsCommand parse(String[] commandWords, Controller controller) throws CommandParseException{
+	public NoParamsCommand parse(String[] commandWords) throws CommandParseException{
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			if(commandWords.length > 1)
 				throw new CommandParseException(this.commandName + " command has no arguments");
@@ -25,7 +25,7 @@ public class ExitCommand extends NoParamsCommand{
 		}
 	}
 	
-	public boolean execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		game.endGame();
 		System.out.println(game.gameOver());
 		return false;

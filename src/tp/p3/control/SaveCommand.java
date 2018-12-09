@@ -29,7 +29,7 @@ public class SaveCommand extends Command{
 
 	}
 	
-	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandExecuteException {
 		if(MyStringUtils.isValidFilename(filename)) {
 			try{
 				buffwriter = new BufferedWriter(new FileWriter(this.filename));
@@ -51,7 +51,7 @@ public class SaveCommand extends Command{
 			return false;
 		}
 	}
-	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			
 			if(commandWords.length == 2) { 						
