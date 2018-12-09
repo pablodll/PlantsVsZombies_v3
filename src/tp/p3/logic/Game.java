@@ -218,12 +218,14 @@ public class Game {
 			board.load(inReader, level.getNumZombies());
 
 			
-			if(level != null) {
-				this.level = level;
+			if(level == null) {
+				throw new FileContentException("Fichero no valido para carga");			
 			}
-						
+			this.level = level;
+			this.cycleCounter = ciclo;
+			suncoinManager.setCoins(suncoin);
 		}
-		catch(IOException ex) {
+		catch(IOException | FileContentException ex) {
 			
 		}
 		
