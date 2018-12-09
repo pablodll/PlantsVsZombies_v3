@@ -71,7 +71,7 @@ public class Board {
 		for(int i = 0; i < list.length; i++) {
 			String[] info = list[i].split(":");
 			if(isZombie) {
-				zombie = ZombieFactory.getZombieInfo(info[0]);
+				zombie = ZombieFactory.getZombie(info[0]);
 				if(zombie != null) {
 					try {
 						zombie.setHealth(Integer.parseInt(info[1]));

@@ -13,8 +13,8 @@ public class CommandParser {
 		new NoneCommand(),
 		new PrintModeCommand(),
 		new ZombieListCommand(),
-		new LoadCommand(),
 		new SaveCommand(),
+		new LoadCommand(),
 	};
 	
 	public static Command parseCommand(String[] commandWords) throws CommandParseException {

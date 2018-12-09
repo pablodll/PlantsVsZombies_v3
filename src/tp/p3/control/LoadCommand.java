@@ -63,9 +63,9 @@ public class LoadCommand extends Command{
 			else {
 				throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + commandTextMsg);
 			}
-	}
-	else {
-		return null;
-	}
+		}
+		else {
+			return null;
+		}
 	}
 }

@@ -12,8 +12,7 @@ import tp.p3.logic.Game;
 public class SaveCommand extends Command{
 
 	private String filename;
-
-	private BufferedWriter buffwriter = null;
+	private static String extension = ".dat";
 	
 	private static String commandText = "save";
 	private static String commandTextMsg = "[S]ave <filename>";
@@ -31,24 +30,20 @@ public class SaveCommand extends Command{
 	
 	public boolean execute(Game game) throws CommandExecuteException {
 		if(MyStringUtils.isValidFilename(filename)) {
-			try{
-				buffwriter = new BufferedWriter(new FileWriter(this.filename));
+			try (BufferedWriter buffwriter = new BufferedWriter(new FileWriter(this.filename + extension))) {
 				buffwriter.write("Plants Vs Zombies 3.0");
 				buffwriter.newLine();
 				buffwriter.newLine();
 				buffwriter.write(game.store());
-				buffwriter.close();
-				System.out.println("Game successfully saved in file " + this.filename + " Use the load command to reload it");
+				System.out.println("Game successfully saved to file " + this.filename + extension + "; use the load command to reload it.");
 				return true;
 			}
 			catch(IOException ex){
-				System.err.println("IOException");
-				return false;
+				throw new CommandExecuteException("Unexpected error saving the data");
 			}
 		}
 		else{
-			System.err.println("Nombre de archivo no valido");
-			return false;
+			throw new CommandExecuteException("Given file name is not valid");
 		}
 	}
 	public Command parse(String[] commandWords) throws CommandParseException {
@@ -60,9 +55,9 @@ public class SaveCommand extends Command{
 			else {
 				throw new CommandParseException("Incorrect number of arguments for " + this.commandName + " command: " + commandTextMsg);
 			}
-	}
-	else {
-		return null;
-	}
+		}
+		else {
+			return null;
+		}
 	}
 }

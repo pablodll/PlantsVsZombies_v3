@@ -15,25 +15,20 @@ public class ZombieFactory {
 		
 	public static Zombie getZombie() {
 		Zombie zombie = null;
-		int i = 0;
 		String zombieType = randZombie();
 		
-		while(zombie == null && i < availableZombies.length) {
-			zombie = (Zombie)availableZombies[i].parse(zombieType);
-			i++;
-		}
+		zombie = getZombie(zombieType);
 			
 		return zombie;
 	}
 	
-	public Zombie getZombieInfo(String symbol) {
+	public static Zombie getZombie(String zombieType) {
 		Zombie zombie = null;
 		int i  =0;
+		
 		while(i < availableZombies.length && zombie == null) {
-				if(availableZombies[i].getSymbol().equals(symbol)){
-					zombie = (Zombie)availableZombies[i];
-				}
-				i++;
+			zombie = (Zombie)availableZombies[i].parse(zombieType);
+			i++;
 		}
 		
 		return zombie;
