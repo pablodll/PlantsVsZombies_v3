@@ -29,6 +29,14 @@ public abstract class GameObject {
 	public abstract void update();
 	public abstract GameObject getThisObject();
 	
+	public void setCycle(int cycle) {
+		this.cycle = cycle;
+	}
+	
+	public void setHealth(int health) {
+		this.health = health;
+	}
+	
 	public void setCoords(int x, int y) {
 		this.x = x;
 		this.y = y;
