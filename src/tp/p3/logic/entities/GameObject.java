@@ -67,6 +67,10 @@ public abstract class GameObject {
 		return symbol;
 	}
 	
+	public int getCycle() {
+		return (this.freq - (this.cycle/this.freq));
+	}
+	
 	public boolean positionIs(int coor_x, int coor_y) {
 		return (x == coor_x && y == coor_y);
 	}

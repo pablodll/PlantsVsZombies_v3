@@ -68,9 +68,9 @@ public class GameObjectList {
 	}
 	
 	public String externalise() {
-		String ret = null;
+		String ret = "";
 		for(int i = 0; i < this.cont; i++) {
-			ret += list[i].getSymbol() + ":" + list[i].getHealth() + ":" + list[i].getPosX() + ":" + list[i].getPosY() + "ciclo";
+			ret += list[i].getSymbol() + ":" + list[i].getHealth() + ":" + list[i].getPosX() + ":" + list[i].getPosY() + ":" + list[i].getCycle() + ", ";
 		}
 		return ret;
 	}

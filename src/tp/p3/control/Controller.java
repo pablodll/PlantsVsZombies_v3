@@ -35,11 +35,11 @@ public class Controller {
 
 	public void run() {
 		while (!game.isFinished()) {
-//			if(!noPrint){
-//				game.update();
-//				printer.printGame(game);
-//				game.computerAction();
-//			}
+			if(!noPrint){
+				game.update();
+				printer.printGame(game);
+				game.computerAction();
+			}
 			noPrint = false;
 			
 			if(!game.isFinished()) {
