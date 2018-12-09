@@ -15,9 +15,9 @@ public class LoadCommand extends Command{
 
 	private String filename;
 	
-	private static String commandText = "add";
-	private static String commandTextMsg = "[A]dd <plant> <x> <y>";
-	private static String helpTextMsg = "adds plant in position x, y.";
+	private static String commandText = "load";
+	private static String commandTextMsg = "[Lo]ad <filename>";
+	private static String helpTextMsg = "Load the state of the game from a file.";
 
 	public LoadCommand() {
 		super(commandText, commandTextMsg, helpTextMsg);

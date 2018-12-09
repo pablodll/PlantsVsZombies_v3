@@ -67,6 +67,14 @@ public class GameObjectList {
 			return "";
 	}
 	
+	public String externalise() {
+		String ret = null;
+		for(int i = 0; i < this.cont; i++) {
+			ret += list[i].getSymbol() + ":" + list[i].getHealth() + ":" + list[i].getPosX() + ":" + list[i].getPosY() + "ciclo";
+		}
+		return ret;
+	}
+	
 	public String getStringDebug(int pos) {
 		return list[pos].toStringDebug();
 	}

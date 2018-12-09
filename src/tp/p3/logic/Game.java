@@ -140,6 +140,11 @@ public class Game {
 			System.out.println(gameOver());
 	}
 	
+	public String store() {
+		return "cycle: " + this.cycleCounter + "\r\nsuncoins: " + suncoinManager.getCoins() + "\r\nlevel: " + getLevel() + "\r\nremzombies: " 
+						 + this.getRemainigZombies() + "\r\n" + board.store();
+	}
+	
 	public String getString(int coor_x, int coor_y) {
 		return board.getString(coor_x, coor_y);
 	}

@@ -1,0 +1,7 @@
+Plants Vs Zombies 3.0
+cycle: 0
+suncoins: 30
+level: HARD
+remzombies: 5
+plantList: nullS:2:0:0ciclo
+zombieList: null

@@ -4,24 +4,13 @@ import tp.p3.logic.Game;
 import tp.p3.logic.Level;
 import tp.p3.logic.print.*;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import tp.p3.control.Controller;
-import tp.p3.exceptions.CommandExecuteException;
-import tp.p3.exceptions.CommandParseException;
-import tp.p3.CopyBytes;
+
+
 public class PlantsVsZombies {
 
 	public static void main(String[] args) {
 
-		try{CopyBytes.execute();
-		} catch (IOException ex) {
-			System.err.format(ex.getMessage() + "%n%n");
-		}	
-			
 		System.out.println(titleScreen());
 		
 		if(args.length == 1 ||args.length == 2) {

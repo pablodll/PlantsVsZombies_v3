@@ -29,6 +29,10 @@ public class Board {
 		zombieList.clean();
 	}
 	
+	public String store() {
+		return "plantList: " + plantList.externalise() + "\r\nzombieList: " + zombieList.externalise();
+	}
+	
 	public String getPlantsString(int pos) {
 		return plantList.getStringDebug(pos);
 	}

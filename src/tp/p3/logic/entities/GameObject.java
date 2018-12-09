@@ -63,6 +63,10 @@ public abstract class GameObject {
 		return name;
 	}
 	
+	public String getSymbol() {
+		return symbol;
+	}
+	
 	public boolean positionIs(int coor_x, int coor_y) {
 		return (x == coor_x && y == coor_y);
 	}
