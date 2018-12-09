@@ -5,6 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import tp.p3.logic.lists.GameObjectList;
+import tp.p3.util.MyStringUtils;
+import tp.p3.exceptions.CommandExecuteException;
+import tp.p3.logic.Level;
 import tp.p3.logic.entities.GameObject;
 import tp.p3.logic.entities.zombies.Zombie;
 
@@ -37,18 +40,26 @@ public class Board {
 		return "plantList: " + plantList.externalise() + "\r\nzombieList: " + zombieList.externalise();
 	}
 	
-	public void load(BufferedReader inReader) {
-	String levelLoaded ="";
-	int cicloLoaded,suncoinsLoaded,remzomLodaded;
+	public void load(BufferedReader inReader, Game game) throws IOException, CommandExecuteException{
+		String[] prefijos = { "cycles", "sunCoins", "level", "remZombies", "plantList", "zombieList" };
+		String[] cicloLoad, suncoinLoad, levelLoad,remZomLoad, plantListLoad,zombieListLoad;
+		int ciclo,suncoin,remzoms;
+		Level level;
 		try{
-			inReader.read();
-			cicloLoaded = inReader.read();
-			inReader.read();
-			suncoinsLoaded = inReader.read();
-			inReader.read();
-			levelLoaded = inReader.readLine();
-			inReader.read();
+			cicloLoad = MyStringUtils.loadLine(inReader, prefijos[0], false);
+			suncoinLoad = MyStringUtils.loadLine(inReader, prefijos[1], false);
+			levelLoad = MyStringUtils.loadLine(inReader, prefijos[2], false);
+			remZomLoad = MyStringUtils.loadLine(inReader, prefijos[3], false);
+			plantListLoad = MyStringUtils.loadLine(inReader, prefijos[4], true);
+			zombieListLoad = MyStringUtils.loadLine(inReader, prefijos[5],true);
 			
+			ciclo = Integer.parseInt(cicloLoad[0]);
+			suncoin = Integer.parseInt(suncoinLoad[0]);
+			remzoms = Integer.parseInt(remZomLoad[0]);
+			level = Level.parse(levelLoad[0]);
+
+			
+			game.etLevel
 			
 		}
 		catch(IOException ex) {

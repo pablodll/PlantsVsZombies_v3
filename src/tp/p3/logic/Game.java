@@ -208,8 +208,8 @@ public class Game {
 		board.explode(x,y,damage);
 	}
 	
-	public void load(BufferedReader inReader) {
-		board.load(inReader);
+	public void load(BufferedReader inReader) throws CommandExecuteException, IOException{
+		board.load(inReader, this);
 	}
 	
 	public String getLevel() {
@@ -219,6 +219,10 @@ public class Game {
 			return "HARD";
 		else
 			return "INSANE";
+	}
+	
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 	
 	public long getSeed() {
