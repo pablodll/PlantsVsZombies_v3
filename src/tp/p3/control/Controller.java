@@ -35,35 +35,39 @@ public class Controller {
 
 	public void run() {
 		while (!game.isFinished()) {
-			if(!noPrint){
-				game.update();
-				printer.printGame(game);
-				game.computerAction();
-			}
+			
+			printGame(noPrint);
 			noPrint = false;
 			
 			if(!game.isFinished()) {
+				
 				System.out.print(prompt);
 				String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
-				try {
+				
+				try {				
 					Command command = CommandParser.parseCommand(words, this);
 				
 					if (command != null) {
-						if (command.execute(game, this)) printGame();
+						if (!command.execute(game, this)) setNoPrintGameState();
 					}
 					else {
-						System.err.println (unknownCommandMsg);
-						//setNoPrintGameState();
+						throw new CommandParseException(unknownCommandMsg);
 					}
+					
 				} catch (CommandParseException | CommandExecuteException ex) {
 					System.err.format(ex.getMessage() + "%n%n");
+					setNoPrintGameState();
 				}
 			}
 		}
 		game.winner();
 	}
 	
-	private void printGame() {
-		printer.printGame(game);
+	private void printGame(boolean noPrint) {
+		if(!noPrint){
+			game.update();
+			printer.printGame(game);
+			game.computerAction();
+		}
 	}
 }
