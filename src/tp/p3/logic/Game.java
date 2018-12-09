@@ -215,7 +215,7 @@ public class Game {
 			remzoms = Integer.parseInt(remZomLoad[0]);
 			level = Level.parse(levelLoad[0]);
 			
-			board.load(inReader, level.getNumZombies());
+			board.load(inReader, this);
 
 			
 			if(level == null) {
@@ -226,8 +226,8 @@ public class Game {
 			suncoinManager.setCoins(suncoin);
 		}
 		catch(IOException | FileContentException ex) {
-			
-		}
+	
+	}
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.NumberFormat;
 
+import tp.p3.logic.Game;
 import tp.p3.logic.lists.GameObjectList;
 import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
@@ -43,7 +44,7 @@ public class Board {
 		return "plantList: " + plantList.externalise() + "\r\nzombieList: " + zombieList.externalise();
 	}
 	
-	public void load(BufferedReader inReader, int numZombies) throws IOException, CommandExecuteException{
+	public void load(BufferedReader inReader, Game game) throws IOException, CommandExecuteException{
 		String[] prefijos = {"plantList", "zombieList" };
 		String[] plantListLoad,zombieListLoad;
 		try{
@@ -51,10 +52,10 @@ public class Board {
 			zombieListLoad = MyStringUtils.loadLine(inReader, prefijos[1],true);
 			
 			this.plantList = new GameObjectList(MAX_PLANTS);
-			this.zombieList = new GameObjectList(numZombies);
+			this.zombieList = new GameObjectList(game.getNumZombies());
 			
-			loadList(plantListLoad, false);
-			loadList(zombieListLoad, true);
+			loadList(plantListLoad, false, game);
+			loadList(zombieListLoad, true, game);
 						
 		}
 		catch(IOException | NumberFormatException ex) {
@@ -63,7 +64,7 @@ public class Board {
 		}
 	}
 	
-	public void loadList(String[] list, boolean isZombie) throws CommandExecuteException, FileContentException{
+	public void loadList(String[] list, boolean isZombie, Game game) throws CommandExecuteException, FileContentException{
 	
 		GameObject plant = null;
 		GameObject zombie = null;
@@ -76,7 +77,7 @@ public class Board {
 						zombie.setHealth(Integer.parseInt(info[1]));
 						zombie.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
 						zombie.setHealth(Integer.parseInt(info[1]));
-//						zombie.setGame(game);
+						zombie.setGame(game);
 					}
 					catch(NullPointerException ex) {
 						System.err.println(ex.getMessage());
@@ -92,7 +93,7 @@ public class Board {
 						plant.setHealth(Integer.parseInt(info[1]));
 						plant.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
 						plant.setHealth(Integer.parseInt(info[1]));
-//						plant.setGame(game);
+						plant.setGame(game);
 					}
 					catch(NullPointerException ex) {
 						System.err.println(ex.getMessage());
