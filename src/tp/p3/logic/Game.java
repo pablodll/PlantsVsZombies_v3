@@ -219,15 +219,13 @@ public class Game {
 			remzoms = Integer.parseInt(remZomLoad[0]);
 			level = Level.parse(levelLoad[0]);
 			
-			this.level = level; // NO
-			
-			this.board.load(inReader, this);
+			this.board.load(inReader, this, level);
 			
 			if(level == null) {
 				throw new FileContentsException("Load failed: invalid file contents");			
 			}
 			
-			
+			this.level = level;
 			this.cycleCounter = ciclo;
 			suncoinManager.setCoins(suncoin);
 		}

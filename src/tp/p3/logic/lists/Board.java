@@ -42,7 +42,7 @@ public class Board {
 		return "plantList: " + plantList.externalise() + "\r\nzombieList: " + zombieList.externalise();
 	}
 	
-	public void load(BufferedReader inReader, Game game) throws FileContentsException{
+	public void load(BufferedReader inReader, Game game, Level level) throws FileContentsException{
 		String[] prefijos = {"plantList", "zombieList" };
 		String[] plantListLoad,zombieListLoad;
 		try{
@@ -50,7 +50,7 @@ public class Board {
 			zombieListLoad = MyStringUtils.loadLine(inReader, prefijos[1],true);
 			
 			this.plantList = new GameObjectList(MAX_PLANTS);
-			this.zombieList = new GameObjectList(game.getLevelNumZombies());
+			this.zombieList = new GameObjectList(level.getNumZombies());
 			
 			loadList(plantListLoad, false, game);
 			loadList(zombieListLoad, true, game);
