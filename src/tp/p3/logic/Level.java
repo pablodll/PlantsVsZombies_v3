@@ -20,16 +20,16 @@ public enum Level {
 	}
 	
 	public static Level parse(String inputString) {
-		for (Level level : Level. values() )
-			if (level . name().equalsIgnoreCase(inputString)) return level;
+		for (Level level : Level.values() )
+			if (level.name().equalsIgnoreCase(inputString)) return level;
 		return null;
 	}
 	
 	public static String all (String separator) {
 		StringBuilder sb = new StringBuilder();
 		
-		for (Level level : Level. values() )
-			sb. append(level.name() + separator);
+		for (Level level : Level.values() )
+			sb.append(level.name() + separator);
 		
 		String allLevels = sb.toString();
 		

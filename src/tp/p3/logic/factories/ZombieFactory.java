@@ -24,7 +24,7 @@ public class ZombieFactory {
 	
 	public static Zombie getZombie(String zombieType) {
 		Zombie zombie = null;
-		int i  =0;
+		int i = 0;
 		
 		while(i < availableZombies.length && zombie == null) {
 			zombie = (Zombie)availableZombies[i].parse(zombieType);

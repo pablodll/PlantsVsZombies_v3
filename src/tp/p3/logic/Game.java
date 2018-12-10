@@ -136,7 +136,7 @@ public class Game {
 	}
 	
 	public String store() {
-		return "cycle: " + this.cycleCounter + "\r\nsuncoins: " + suncoinManager.getCoins() + "\r\nlevel: " + getLevel() + "\r\nremzombies: " 
+		return "cycle: " + this.cycleCounter + "\r\nsunCoins: " + suncoinManager.getCoins() + "\r\nlevel: " + getLevel() + "\r\nremZombies: " 
 						 + this.getRemainigZombies() + "\r\n" + board.store();
 	}
 	
@@ -204,7 +204,7 @@ public class Game {
 	}
 	
 	public void load (BufferedReader inReader) throws FileContentsException {
-		String[] prefijos = { "cycle", "suncoins", "level", "remzombies"};
+		String[] prefijos = { "cycle", "sunCoins", "level", "remZombies"};
 		String[] cicloLoad, suncoinLoad, levelLoad,remZomLoad, plantListLoad,zombieListLoad;
 		int ciclo,suncoin,remzoms;
 		Level level;
@@ -219,13 +219,15 @@ public class Game {
 			remzoms = Integer.parseInt(remZomLoad[0]);
 			level = Level.parse(levelLoad[0]);
 			
+			this.level = level; // NO
+			
 			this.board.load(inReader, this);
 			
 			if(level == null) {
 				throw new FileContentsException("Load failed: invalid file contents");			
 			}
 			
-			this.level = level;
+			
 			this.cycleCounter = ciclo;
 			suncoinManager.setCoins(suncoin);
 		}

@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import tp.p3.logic.Game;
+import tp.p3.logic.Level;
 import tp.p3.logic.lists.GameObjectList;
 import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.FileContentsException;
@@ -67,6 +68,7 @@ public class Board {
 	
 		GameObject plant = null;
 		GameObject zombie = null;
+		
 		for(int i = 0; i < list.length; i++) {
 			String[] info = list[i].split(":");
 			if(isZombie) {
@@ -79,7 +81,6 @@ public class Board {
 						zombie.setGame(game);
 					}
 					catch(NumberFormatException | NullPointerException ex) {
-						System.err.println(ex.getMessage());
 						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}
@@ -95,7 +96,6 @@ public class Board {
 						plant.setGame(game);
 					}
 					catch(NumberFormatException | NullPointerException ex) {
-						System.err.println(ex.getMessage());
 						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}
