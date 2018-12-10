@@ -77,7 +77,7 @@ public class Board {
 					try {
 						zombie.setHealth(Integer.parseInt(info[1]));
 						zombie.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
-						zombie.setHealth(Integer.parseInt(info[1]));
+						zombie.setCycle(zombie.getFreq() - Integer.parseInt(info[4]));
 						zombie.setGame(game);
 					}
 					catch(NumberFormatException | NullPointerException ex) {
@@ -92,7 +92,7 @@ public class Board {
 					try {
 						plant.setHealth(Integer.parseInt(info[1]));
 						plant.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
-						plant.setHealth(Integer.parseInt(info[1]));
+						plant.setCycle(plant.getFreq() - Integer.parseInt(info[4]));
 						plant.setGame(game);
 					}
 					catch(NumberFormatException | NullPointerException ex) {

@@ -59,6 +59,10 @@ public abstract class GameObject {
 		return health;
 	}
 	
+	public int getFreq() {
+		return freq;
+	}
+	
 	public int getPosX() {
 		return x;
 	}
