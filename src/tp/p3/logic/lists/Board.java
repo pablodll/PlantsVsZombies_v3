@@ -49,7 +49,7 @@ public class Board {
 			zombieListLoad = MyStringUtils.loadLine(inReader, prefijos[1],true);
 			
 			this.plantList = new GameObjectList(MAX_PLANTS);
-			this.zombieList = new GameObjectList(game.getNumZombies());
+			this.zombieList = new GameObjectList(game.getLevelNumZombies());
 			
 			loadList(plantListLoad, false, game);
 			loadList(zombieListLoad, true, game);

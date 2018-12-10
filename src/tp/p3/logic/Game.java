@@ -160,6 +160,10 @@ public class Game {
 		return zombieManager.getNumZom();
 	}
 	
+	public int getLevelNumZombies() {
+		return level.getNumZombies();
+	}
+	
 	public int getNumZombies() {
 		return board.getNumZombies();
 	}
