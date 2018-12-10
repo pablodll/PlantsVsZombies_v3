@@ -50,15 +50,10 @@ public class AddCommand extends Command {
 		if (plant != null) {
 			if (!game.addPlantToGame(plant, x, y)) {
 				return false;
-//				System.err.println("The plant could not be added");
-//				controller.setNoPrintGameState();
 			}
 		} 
 		else {
 			throw new CommandExecuteException("Unknown plant name: " + plantName);
-			// return false;
-//			System.err.println("Invalid plant");
-//			controller.setNoPrintGameState();
 		}
 		return true;
 	}

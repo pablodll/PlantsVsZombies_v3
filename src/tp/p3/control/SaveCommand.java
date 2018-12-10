@@ -43,7 +43,7 @@ public class SaveCommand extends Command{
 			}
 		}
 		else{
-			throw new CommandExecuteException("Given file name is not valid");
+			throw new CommandExecuteException("\"" + filename + "\" is not a valid file name.");
 		}
 	}
 	public Command parse(String[] commandWords) throws CommandParseException {

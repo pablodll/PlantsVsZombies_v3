@@ -1,13 +1,13 @@
 package tp.p3.logic;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
 import tp.p3.logic.lists.Board;
 import tp.p3.logic.print.GamePrinter;
 import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
+import tp.p3.exceptions.FileContentsException;
 import tp.p3.logic.Level;
 import tp.p3.logic.SuncoinManager;
 import tp.p3.logic.ZombieManager;
@@ -199,8 +199,8 @@ public class Game {
 		board.explode(x,y,damage);
 	}
 	
-	public void load(BufferedReader inReader) throws CommandExecuteException, IOException{
-		String[] prefijos = { "cycles", "sunCoins", "level", "remZombies"};
+	public void load (BufferedReader inReader) throws FileContentsException {
+		String[] prefijos = { "cycle", "suncoins", "level", "remzombies"};
 		String[] cicloLoad, suncoinLoad, levelLoad,remZomLoad, plantListLoad,zombieListLoad;
 		int ciclo,suncoin,remzoms;
 		Level level;
@@ -215,20 +215,22 @@ public class Game {
 			remzoms = Integer.parseInt(remZomLoad[0]);
 			level = Level.parse(levelLoad[0]);
 			
-			board.load(inReader, this);
-
+			this.board.load(inReader, this);
 			
 			if(level == null) {
-				throw new FileContentException("Fichero no valido para carga");			
+				throw new FileContentsException("Load failed: invalid file contents");			
 			}
+			
 			this.level = level;
 			this.cycleCounter = ciclo;
 			suncoinManager.setCoins(suncoin);
 		}
-		catch(IOException | FileContentException ex) {
-	
-	}
-		
+		catch(IOException ex) {
+			throw new FileContentsException("Load failed: invalid file contents");
+		}
+		catch(FileContentsException ex) {
+			throw ex;
+		}
 	}
 	
 	public String getLevel() {

@@ -7,13 +7,12 @@ import java.io.IOException;
 import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.exceptions.CommandParseException;
+import tp.p3.exceptions.FileContentsException;
 import tp.p3.logic.Game;
 
 public class LoadCommand extends Command{
 
 	private String filename;
-	
-	private BufferedReader inReader = null; 
 	
 	private static String commandText = "load";
 	private static String commandTextMsg = "[Lo]ad <filename>";
@@ -28,33 +27,39 @@ public class LoadCommand extends Command{
 		this.filename = filename;
 	}
 	
-	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandExecuteException {
+		
 		if(MyStringUtils.isValidFilename(filename) && MyStringUtils.isReadable(filename)) {
-			try {
-				inReader = new BufferedReader(new FileReader(filename));
+			
+			try (BufferedReader inReader = new BufferedReader(new FileReader(filename)) ){
+				
 				String title = inReader.readLine();
+				
 				if(title.equals("Plants Vs Zombies 3.0")) {
+					
 					inReader.readLine();
 					game.load(inReader);
+					
 					System.out.println("Game successfully loaded from file " + filename);
-					inReader.close();
 				}
 				else {
-					inReader.close();
-					throw new CommandExecuteException("Cabecera " + title +" no valida.");
+					throw new CommandExecuteException("Load failed: invalid file contents");
 				}
 			}
 			catch(IOException ex) {
-				
+				throw new CommandExecuteException("Load failed");
+			}
+			catch(FileContentsException ex) {
+				throw new CommandExecuteException(ex);
 			}
 		}
 		else {
-			throw new CommandExecuteException("El fichero" + filename + "no es valido.");
+			throw new CommandExecuteException("\"" + filename + "\" is not a valid file name.");
 		}
 		
 		return true;
 	}
-	public Command parse(String[] commandWords, Controller controller) throws CommandParseException {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(commandName.substring(0, 2))) {
 			
 			if(commandWords.length == 2) { 						
@@ -68,5 +73,4 @@ public class LoadCommand extends Command{
 			return null;
 		}
 	}
-}
 }

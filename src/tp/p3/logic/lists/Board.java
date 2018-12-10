@@ -1,15 +1,12 @@
 package tp.p3.logic.lists;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.NumberFormat;
 
 import tp.p3.logic.Game;
 import tp.p3.logic.lists.GameObjectList;
 import tp.p3.util.MyStringUtils;
-import tp.p3.exceptions.CommandExecuteException;
-import tp.p3.logic.Level;
+import tp.p3.exceptions.FileContentsException;
 import tp.p3.logic.entities.GameObject;
 import tp.p3.logic.entities.zombies.Zombie;
 import tp.p3.logic.factories.PlantFactory;
@@ -44,7 +41,7 @@ public class Board {
 		return "plantList: " + plantList.externalise() + "\r\nzombieList: " + zombieList.externalise();
 	}
 	
-	public void load(BufferedReader inReader, Game game) throws IOException, CommandExecuteException{
+	public void load(BufferedReader inReader, Game game) throws FileContentsException{
 		String[] prefijos = {"plantList", "zombieList" };
 		String[] plantListLoad,zombieListLoad;
 		try{
@@ -58,13 +55,15 @@ public class Board {
 			loadList(zombieListLoad, true, game);
 						
 		}
-		catch(IOException | NumberFormatException ex) {
-			System.err.println(ex.getMessage());
-			throw new FileContentsException("Fichero no valido para la carga.");
+		catch(IOException ex) {
+			throw new FileContentsException("Load failed: invalid file contents");
+		}
+		catch(FileContentsException ex) {
+			throw ex;
 		}
 	}
 	
-	public void loadList(String[] list, boolean isZombie, Game game) throws CommandExecuteException, FileContentException{
+	public void loadList(String[] list, boolean isZombie, Game game) throws FileContentsException{
 	
 		GameObject plant = null;
 		GameObject zombie = null;
@@ -79,12 +78,11 @@ public class Board {
 						zombie.setHealth(Integer.parseInt(info[1]));
 						zombie.setGame(game);
 					}
-					catch(NullPointerException ex) {
-						System.err.println(ex.getMessage());
-						throw new FileContentException("FIchero no valido");
+					catch(NumberFormatException ex) {
+						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}
-			zombieList.add(zombie);
+				zombieList.add(zombie);
 			}
 			else{
 				plant = PlantFactory.getPlant(info[0]);
@@ -95,9 +93,8 @@ public class Board {
 						plant.setHealth(Integer.parseInt(info[1]));
 						plant.setGame(game);
 					}
-					catch(NullPointerException ex) {
-						System.err.println(ex.getMessage());
-						throw new FileContentException("FIchero no valido");
+					catch(NumberFormatException ex) {
+						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}
 				plantList.add(plant);
