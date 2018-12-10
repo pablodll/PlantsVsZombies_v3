@@ -70,7 +70,7 @@ public class Board {
 		for(int i = 0; i < list.length; i++) {
 			String[] info = list[i].split(":");
 			if(isZombie) {
-				zombie = ZombieFactory.getZombie(info[0]);
+				zombie = ZombieFactory.getZombie(info[0].toLowerCase());
 				if(zombie != null) {
 					try {
 						zombie.setHealth(Integer.parseInt(info[1]));
@@ -78,14 +78,15 @@ public class Board {
 						zombie.setHealth(Integer.parseInt(info[1]));
 						zombie.setGame(game);
 					}
-					catch(NumberFormatException ex) {
+					catch(NumberFormatException | NullPointerException ex) {
+						System.err.println(ex.getMessage());
 						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}
 				zombieList.add(zombie);
 			}
 			else{
-				plant = PlantFactory.getPlant(info[0]);
+				plant = PlantFactory.getPlant(info[0].toLowerCase());
 				if(plant != null) {
 					try {
 						plant.setHealth(Integer.parseInt(info[1]));
@@ -93,7 +94,8 @@ public class Board {
 						plant.setHealth(Integer.parseInt(info[1]));
 						plant.setGame(game);
 					}
-					catch(NumberFormatException ex) {
+					catch(NumberFormatException | NullPointerException ex) {
+						System.err.println(ex.getMessage());
 						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}
