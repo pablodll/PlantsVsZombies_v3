@@ -206,7 +206,7 @@ public class Game {
 	
 	public void load (BufferedReader inReader) throws FileContentsException {
 		String[] prefijos = { "cycle", "sunCoins", "level", "remZombies"};
-		String[] cicloLoad, suncoinLoad, levelLoad,remZomLoad, plantListLoad,zombieListLoad;
+		String[] cicloLoad, suncoinLoad, levelLoad,remZomLoad;
 		int ciclo,suncoin,remzoms;
 		Level level;
 		try{
