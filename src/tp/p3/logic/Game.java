@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import tp.p3.logic.lists.Board;
 import tp.p3.logic.print.GamePrinter;
+import tp.p3.logic.print.ReleasePrinter;
 import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.exceptions.FileContentsException;
@@ -233,6 +234,8 @@ public class Game {
 			this.cycleCounter = ciclo;
 			zombieManager.setNumZombies(remzoms);
 			suncoinManager.setCoins(suncoin);
+			setPrinter(new ReleasePrinter(this));
+
 		}
 		catch(IOException ex) {
 			throw new FileContentsException("Load failed: invalid file contents");
