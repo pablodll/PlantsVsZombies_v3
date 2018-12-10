@@ -1,8 +1,8 @@
 Plants Vs Zombies 3.0
 
 cycle: 17
-sunCoins: 100
+sunCoins: 9999
 level: INSANE
-remZombies: 4
+remZombies: 0
 plantList: P:4:1:0:0, 
 zombieList: W:8:2:6:3, Z:5:0:4:1, 

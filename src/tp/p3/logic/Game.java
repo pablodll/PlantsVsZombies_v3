@@ -108,7 +108,7 @@ public class Game {
 	}
 	
 	public boolean isFinished() {
-		if(board.areZombiesTerminated() && zombieManager.getNumZom() == 0) { // User Wins
+		if(board.areZombiesTerminated() && zombieManager.getNumZombies() == 0) { // User Wins
 			gameFinished = true;
 		}
 		else if(!board.emptyCol(0)) {
@@ -128,7 +128,7 @@ public class Game {
 	}
 	
 	public void winner() {
-		if(board.areZombiesTerminated() && zombieManager.getNumZom() == 0) 
+		if(board.areZombiesTerminated() && zombieManager.getNumZombies() == 0) 
 			System.out.println(userWins());
 		
 		else if(!board.emptyCol(0)) 
@@ -157,7 +157,7 @@ public class Game {
 	}
 	
 	public int getRemainigZombies() {
-		return zombieManager.getNumZom();
+		return zombieManager.getNumZombies();
 	}
 	
 	public int getLevelNumZombies() {
@@ -231,6 +231,7 @@ public class Game {
 			
 			this.level = level;
 			this.cycleCounter = ciclo;
+			zombieManager.setNumZombies(remzoms);
 			suncoinManager.setCoins(suncoin);
 		}
 		catch(IOException ex) {

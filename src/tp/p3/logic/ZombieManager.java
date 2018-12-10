@@ -17,8 +17,12 @@ public class ZombieManager {
 		rand.setSeed(seed);
 	}
 	
-	public int getNumZom() {
+	public int getNumZombies() {
 		return numZombies;
+	}
+	
+	public void setNumZombies(int numZombies) {
+		this.numZombies = numZombies;
 	}
 	
 	public boolean isZombieAdded() {

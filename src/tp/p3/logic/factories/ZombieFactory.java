@@ -1,8 +1,6 @@
 package tp.p3.logic.factories;
 
 import java.util.Random;
-import tp.p3.logic.Game;
-import tp.p3.logic.entities.GameObject;
 import tp.p3.logic.entities.zombies.*;
 
 public class ZombieFactory {
