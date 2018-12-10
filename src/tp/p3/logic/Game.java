@@ -213,12 +213,16 @@ public class Game {
 			suncoinLoad = MyStringUtils.loadLine(inReader, prefijos[1], false);
 			levelLoad = MyStringUtils.loadLine(inReader, prefijos[2], false);
 			remZomLoad = MyStringUtils.loadLine(inReader, prefijos[3], false);
-
-			ciclo = Integer.parseInt(cicloLoad[0]);
-			suncoin = Integer.parseInt(suncoinLoad[0]);
-			remzoms = Integer.parseInt(remZomLoad[0]);
-			level = Level.parse(levelLoad[0]);
 			
+			try {
+				ciclo = Integer.parseInt(cicloLoad[0]);
+				suncoin = Integer.parseInt(suncoinLoad[0]);
+				remzoms = Integer.parseInt(remZomLoad[0]);
+				level = Level.parse(levelLoad[0]);
+			} catch (NumberFormatException ex) {
+				throw new FileContentsException("Load failed: invalid file contents");	
+			}
+				
 			this.board.load(inReader, this, level);
 			
 			if(level == null) {

@@ -50,7 +50,7 @@ public class LoadCommand extends Command{
 				throw new CommandExecuteException("Load failed");
 			}
 			catch(FileContentsException ex) {
-				throw new CommandExecuteException(ex);
+				throw new CommandExecuteException(ex.getMessage());
 			}
 		}
 		else {
