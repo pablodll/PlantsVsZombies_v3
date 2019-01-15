@@ -46,6 +46,7 @@ public class SaveCommand extends Command{
 			throw new CommandExecuteException("\"" + filename + "\" is not a valid file name.");
 		}
 	}
+	
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
 			

@@ -46,6 +46,9 @@ public class LoadCommand extends Command{
 					throw new CommandExecuteException("Load failed: invalid file contents");
 				}
 			}
+			catch(NullPointerException ex) {
+				throw new CommandExecuteException("Load failed: invalid file contents");
+			}
 			catch(IOException ex) {
 				throw new CommandExecuteException("Load failed");
 			}
@@ -59,6 +62,7 @@ public class LoadCommand extends Command{
 		
 		return true;
 	}
+	
 	public Command parse(String[] commandWords) throws CommandParseException {
 		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(commandName.substring(0, 2))) {
 			

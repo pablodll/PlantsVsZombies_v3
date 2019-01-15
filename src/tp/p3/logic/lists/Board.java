@@ -177,7 +177,7 @@ public class Board {
 	}
 	
 	public void ZombieAttacks(int x, int y, int damage) {
-		plantList.getAttacked(x, y, damage);
+		plantList.takeDamage(x, y, damage);
 	}
 
 	public void explode(int x, int y, int damage) {
@@ -185,7 +185,7 @@ public class Board {
 			for(int j = -1; j <= 1; j++ ) {
 				if(!isEmpty(x - i, y - j))
 					if(zombieList.isGameObject(x-i, y - j))
-						zombieList.getAttacked(x - i, y - j, damage);
+						zombieList.takeDamage(x - i, y - j, damage);
 			}
 		}		
 	}

@@ -2,7 +2,6 @@ package tp.p3.control;
 
 import tp.p3.logic.Game;
 import tp.p3.control.CommandParser;
-import tp.p3.exceptions.*;
 
 public class HelpCommand extends NoParamsCommand{
 	
@@ -14,16 +13,8 @@ public class HelpCommand extends NoParamsCommand{
 		super(commandText, commandTextMsg, helpTextMsg);
 	}
 	
-	public NoParamsCommand parse(String[] commandWords) throws CommandParseException{
-		if(commandWords[0].equals(this.commandName) || commandWords[0].equals(this.commandLetter)) {
-			if(commandWords.length > 1)
-				throw new CommandParseException(this.commandName + " command has no arguments");
-			else
-				return new HelpCommand();
-		}
-		else {
-			return null;
-		}
+	public NoParamsCommand getThisCommand() {
+		return new HelpCommand();
 	}
 	
 	public boolean execute(Game game) {

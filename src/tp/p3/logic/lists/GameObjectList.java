@@ -44,13 +44,6 @@ public class GameObjectList {
 		}
 		cont--;
 	}
-
-	public GameObject getGameObject(int x, int y) { // Devuelve un gameObject en una posicion dada
-		int i = 0;
-		while((i < cont) && !(list[i].positionIs(x, y)))
-				i++;
-		return list[i];
-	}
 	
 	public boolean isGameObject(int coor_x, int coor_y) { // Devuelve si en una coordenada dada hay un gameobject determinado
 		int i = 0;
@@ -60,9 +53,16 @@ public class GameObjectList {
 		return i < cont;
 	}
 	
-	public String getString(int i, int j) {
-		if(isGameObject(i, j))
-			return getGameObject(i, j).toString();
+	public String getString(int x, int y) {
+		if(isGameObject(x, y)) {
+			
+			int i = 0;
+			while((i < cont) && !(list[i].positionIs(x, y))) {
+				i++;
+			}
+			
+			return list[i].toString();
+		}
 		else
 			return "";
 	}
@@ -77,10 +77,6 @@ public class GameObjectList {
 	
 	public String getStringDebug(int pos) {
 		return list[pos].toStringDebug();
-	}
-	
-	public void getAttacked(int x, int y, int damage) {
-		getGameObject(x, y).takeDamage(damage);
 	}
 	
 	public boolean emptyRow(int row) { // Comprueba si la fila tiene algun gameObject del tipo
@@ -102,8 +98,13 @@ public class GameObjectList {
 	}
 	
 	public void takeDamage(int x, int y, int damage) {
-		GameObject obj = getGameObject(x, y);
-		obj.takeDamage(damage);
+		int i = 0;
+		
+		while((i < cont) && !(list[i].positionIs(x, y))) {
+			i++;
+		}
+		
+		list[i].takeDamage(damage);
 	}
 	
 	public int checkFirst(int row) { // Dada una fila(X) devuelve la coord y del primer gameObject deseado en esa fila
