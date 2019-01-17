@@ -2,7 +2,6 @@ package tp.p3.control;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 
 import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;

@@ -1,7 +1,6 @@
 package tp.p3.logic.print;
 
 import tp.p3.logic.Game;
-import tp.p3.logic.entities.GameObject;
 import tp.p3.util.MyStringUtils;
 
 public abstract class BoardPrinter implements GamePrinter{
