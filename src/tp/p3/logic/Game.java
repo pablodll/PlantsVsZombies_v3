@@ -9,6 +9,7 @@ import tp.p3.logic.print.ReleasePrinter;
 import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.CommandExecuteException;
 import tp.p3.exceptions.FileContentsException;
+import tp.p3.exceptions.SuncoinException;
 import tp.p3.logic.Level;
 import tp.p3.logic.SuncoinManager;
 import tp.p3.logic.ZombieManager;
@@ -55,17 +56,17 @@ public class Game {
 	
 	public boolean addPlantToGame(Plant plant, int x, int y) throws CommandExecuteException{
 		if(x >= 0 && x < getRows() && y >= 0 && y < getCols() && isEmpty(x,y)) {
-			if(suncoinManager.getCoins() >= plant.getCost()) {
+			try {
+				suncoinManager.spendCoins(plant.getCost());
+				
 				plant.setCoords(x, y);
 				plant.setGame(this);
-				
 				board.addPlant(plant);
-				suncoinManager.useCoins(plant.getCost());
 				
 				return true;
-			}
-			else {
-				throw new CommandExecuteException("Failed to add " + plant.getName() + ": not enough suncoins available");
+				
+			} catch(SuncoinException ex){
+				throw new CommandExecuteException("Failed to add " + plant.getName() + ": " + ex);
 			}
 		}
 		else {
