@@ -10,8 +10,6 @@ import tp.p3.util.MyStringUtils;
 import tp.p3.exceptions.FileContentsException;
 import tp.p3.logic.entities.GameObject;
 import tp.p3.logic.entities.zombies.Zombie;
-import tp.p3.logic.factories.PlantFactory;
-import tp.p3.logic.factories.ZombieFactory;
 
 public class Board {
 

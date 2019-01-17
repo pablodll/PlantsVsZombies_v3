@@ -238,11 +238,8 @@ public class Game {
 			setPrinter(new ReleasePrinter(this));
 
 		}
-		catch(IOException ex) {
+		catch(Exception ex) {
 			throw new FileContentsException("Load failed: invalid file contents");
-		}
-		catch(FileContentsException ex) {
-			throw ex;
 		}
 	}
 	
