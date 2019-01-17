@@ -41,18 +41,28 @@ public class PrintModeCommand extends Command{
 		
 		boolean ret = false;
 		
-		switch(mode) {
-			case "release":
-				game.setPrinter(new ReleasePrinter(game));
-				ret = true;
-				break;
-			case "debug":
-				game.setPrinter(new DebugPrinter(game));
-				ret = true;
-				break;
-			default:
-				throw new CommandExecuteException("Unknown print mode: " + mode);
+		GamePrinter printer = PrinterFactory.parsePrinter(this.mode, game);
+		
+		if(printer != null) {
+			game.setPrinter(printer);
+			ret = true;
 		}
+		else {
+			throw new CommandExecuteException("Unknown print mode: " + mode);
+		}
+		
+//		switch(mode) {
+//			case "release":
+//				game.setPrinter(new ReleasePrinter(game));
+//				ret = true;
+//				break;
+//			case "debug":
+//				game.setPrinter(new DebugPrinter(game));
+//				ret = true;
+//				break;
+//			default:
+//				throw new CommandExecuteException("Unknown print mode: " + mode);
+//		}
 		
 		return ret;
 	}

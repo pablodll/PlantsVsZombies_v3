@@ -1,9 +1,12 @@
 package tp.p3.logic.print;
 
 import tp.p3.logic.Game;
+import tp.p3.logic.entities.GameObject;
 import tp.p3.util.MyStringUtils;
 
 public abstract class BoardPrinter implements GamePrinter{
+	
+	protected String name;
 	
 	protected String[][] board;
 	protected int dimX; 
@@ -12,11 +15,25 @@ public abstract class BoardPrinter implements GamePrinter{
 	
 	private static final String space = " ";
 	
+	public BoardPrinter() {	
+		
+	}
+	
 	public BoardPrinter(Game game) {	
 		encodeGame(game);
 	}
 	
 	protected abstract void encodeGame(Game game);
+	protected abstract GamePrinter getThisPrinter(Game game);
+	
+	public GamePrinter parse(String name, Game game) {
+		if(name.equals(this.name)) {
+			return getThisPrinter(game);
+		}
+		else {
+			return null;
+		}
+	}
 	
 	public String boardToString(int cellSize) {
 		

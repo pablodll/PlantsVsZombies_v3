@@ -15,8 +15,18 @@ public class DebugPrinter extends BoardPrinter{
 	
 //	private int tam; 
 	
+	public DebugPrinter() {	
+		super();
+		this.name = "debug";
+	}
+	
 	public DebugPrinter(Game game) {
 		super(game);
+		this.name = "debug";
+	}
+	
+	protected GamePrinter getThisPrinter(Game game) {
+		return new DebugPrinter(game);
 	}
 	
 	protected void encodeGame(Game game) {

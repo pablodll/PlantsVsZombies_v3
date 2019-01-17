@@ -11,11 +11,21 @@ public class ReleasePrinter extends BoardPrinter{
 	
 	private final int cellSize = 7;
 	
+	public ReleasePrinter() {	
+		super();
+		this.name = "release";
+	}
+	
 	public ReleasePrinter(Game game) {
 		super(game);
 		
 		this.dimX = game.getRows();
 		this.dimY = game.getCols();
+		this.name = "release";
+	}
+	
+	protected GamePrinter getThisPrinter(Game game) {
+		return new ReleasePrinter(game);
 	}
 	
 	protected void encodeGame(Game game) {
