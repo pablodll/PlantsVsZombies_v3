@@ -66,7 +66,7 @@ public class Game {
 				return true;
 				
 			} catch(SuncoinException ex){
-				throw new CommandExecuteException("Failed to add " + plant.getName() + ": " + ex);
+				throw new CommandExecuteException("Failed to add " + plant.getName() + ": " + ex.getMessage());
 			}
 		}
 		else {

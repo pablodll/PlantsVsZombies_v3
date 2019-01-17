@@ -38,7 +38,7 @@ public class SaveCommand extends Command{
 				System.out.println("Game successfully saved to file " + this.filename + extension + "; use the load command to reload it.");
 				return true;
 			}
-			catch(IOException ex){
+			catch(Exception ex){
 				throw new CommandExecuteException("Unexpected error saving the data");
 			}
 		}

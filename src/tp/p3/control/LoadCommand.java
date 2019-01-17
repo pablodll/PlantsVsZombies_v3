@@ -49,11 +49,11 @@ public class LoadCommand extends Command{
 			catch(NullPointerException ex) {
 				throw new CommandExecuteException("Load failed: invalid file contents");
 			}
-			catch(IOException ex) {
-				throw new CommandExecuteException("Load failed");
-			}
 			catch(FileContentsException ex) {
 				throw new CommandExecuteException(ex.getMessage());
+			}
+			catch(Exception ex) {
+				throw new CommandExecuteException("Load failed");
 			}
 		}
 		else {

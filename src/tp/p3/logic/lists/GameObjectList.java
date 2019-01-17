@@ -144,7 +144,7 @@ public class GameObjectList {
 						zombie.setCycle(zombie.getFreq() - Integer.parseInt(info[4]));
 						zombie.setGame(game);
 					}
-					catch(NumberFormatException | NullPointerException ex) {
+					catch(Exception ex) {
 						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}
@@ -159,7 +159,7 @@ public class GameObjectList {
 						plant.setCycle(plant.getFreq() - Integer.parseInt(info[4]));
 						plant.setGame(game);
 					}
-					catch(NumberFormatException | NullPointerException ex) {
+					catch(Exception ex) {
 						throw new FileContentsException("Load failed: invalid file contents");
 					}
 				}

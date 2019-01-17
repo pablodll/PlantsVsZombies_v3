@@ -54,11 +54,8 @@ public class Board {
 			zombieList.loadList(zombieListLoad, true, game);
 		
 		}
-		catch(IOException ex) {
+		catch(Exception ex) {
 			throw new FileContentsException("Load failed: invalid file contents");
-		}
-		catch(FileContentsException ex) {
-			throw ex;
 		}
 	}
 	
