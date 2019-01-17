@@ -52,9 +52,9 @@ public class Board {
 			this.plantList = new GameObjectList(MAX_PLANTS);
 			this.zombieList = new GameObjectList(level.getNumZombies());
 			
-			loadList(plantListLoad, false, game);
-			loadList(zombieListLoad, true, game);
-						
+			plantList.loadList(plantListLoad, false, game);
+			zombieList.loadList(zombieListLoad, true, game);
+		
 		}
 		catch(IOException ex) {
 			throw new FileContentsException("Load failed: invalid file contents");
@@ -64,47 +64,7 @@ public class Board {
 		}
 	}
 	
-	public void loadList(String[] list, boolean isZombie, Game game) throws FileContentsException{
-	
-		GameObject plant = null;
-		GameObject zombie = null;
-		
-		for(int i = 0; i < list.length; i++) {
-			String[] info = list[i].split(":");
-			if(isZombie) {
-				zombie = ZombieFactory.getZombie(info[0].toLowerCase());
-				if(zombie != null) {
-					try {
-						zombie.setHealth(Integer.parseInt(info[1]));
-						zombie.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
-						zombie.setCycle(zombie.getFreq() - Integer.parseInt(info[4]));
-						zombie.setGame(game);
-					}
-					catch(NumberFormatException | NullPointerException ex) {
-						throw new FileContentsException("Load failed: invalid file contents");
-					}
-				}
-				zombieList.add(zombie);
-			}
-			else{
-				plant = PlantFactory.getPlant(info[0].toLowerCase());
-				if(plant != null) {
-					try {
-						plant.setHealth(Integer.parseInt(info[1]));
-						plant.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
-						plant.setCycle(plant.getFreq() - Integer.parseInt(info[4]));
-						plant.setGame(game);
-					}
-					catch(NumberFormatException | NullPointerException ex) {
-						throw new FileContentsException("Load failed: invalid file contents");
-					}
-				}
-				plantList.add(plant);
-			}
-		}
-		
-	}
-	
+
 	public String getPlantsString(int pos) {
 		return plantList.getStringDebug(pos);
 	}

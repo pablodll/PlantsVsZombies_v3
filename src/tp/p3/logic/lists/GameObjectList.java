@@ -1,6 +1,10 @@
 package tp.p3.logic.lists;
 
+import tp.p3.exceptions.FileContentsException;
+import tp.p3.logic.Game;
 import tp.p3.logic.entities.GameObject;
+import tp.p3.logic.factories.PlantFactory;
+import tp.p3.logic.factories.ZombieFactory;
 
 public class GameObjectList {
 
@@ -123,4 +127,46 @@ public class GameObjectList {
 		
 		return y;
 	}
+	
+	public void loadList(String[] list, boolean isZombie, Game game) throws FileContentsException{
+		
+		GameObject plant = null;
+		GameObject zombie = null;
+		
+		for(int i = 0; i < list.length; i++) {
+			String[] info = list[i].split(":");
+			if(isZombie) {
+				zombie = ZombieFactory.getZombie(info[0].toLowerCase());
+				if(zombie != null) {
+					try {
+						zombie.setHealth(Integer.parseInt(info[1]));
+						zombie.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
+						zombie.setCycle(zombie.getFreq() - Integer.parseInt(info[4]));
+						zombie.setGame(game);
+					}
+					catch(NumberFormatException | NullPointerException ex) {
+						throw new FileContentsException("Load failed: invalid file contents");
+					}
+				}
+				this.add(zombie);
+			}
+			else{
+				plant = PlantFactory.getPlant(info[0].toLowerCase());
+				if(plant != null) {
+					try {
+						plant.setHealth(Integer.parseInt(info[1]));
+						plant.setCoords(Integer.parseInt(info[2]),Integer.parseInt(info[3]));
+						plant.setCycle(plant.getFreq() - Integer.parseInt(info[4]));
+						plant.setGame(game);
+					}
+					catch(NumberFormatException | NullPointerException ex) {
+						throw new FileContentsException("Load failed: invalid file contents");
+					}
+				}
+				this.add(plant);
+			}
+		}
+		
+	}
+	
 }
